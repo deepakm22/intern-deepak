@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+<style>
+    body {
+        font-family: 'Times New Roman', Times, serif;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #0e0c0c;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+</head>
+<body>
+    <center>
+
+<h2>Registration Form</h2>
+
+<form id="registrationForm">
+    <label for="fullName">Full Name:</label><br>
+    <input type="text" id="fullName" name="fullName" required><br><br>
+    
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <label for="phone">Phone:</label><br>
+    <input type="tel" id="phone" name="phone" required><br><br>
+    
+    <label for="state">State:</label><br>
+    <input type="text" id="state" name="state" required><br><br>
+    
+    <button type="button" onclick="confirmRegistration()" style="background-color: rgb(45, 161, 228);">Register</button>
+</form>
+
+<div id="confirmation" style="display: none;">
+    <p>Are you sure you want to submit?</p>
+    <button onclick="submitForm()">Yes</button>
+    <button onclick="cancelSubmit()">NO</button>
+</div>
+
+<div id="registrationDetails" style="display: none;">
+    <h2>Registration Details</h2>
+    <table id="table">
+        <tr>
+            <th>Field</th>
+            <th>Value</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+function confirmRegistration() {
+    document.getElementById("confirmation").style.display = "block";
+}
+
+function submitForm() {
+    document.getElementById("confirmation").style.display = "none";
+    document.getElementById("registrationDetails").style.display = "block";
+
+var fullName = document.getElementById("fullName").value;
+var email = document.getElementById("email").value;
+var phone = document.getElementById("phone").value;
+var state = document.getElementById("state").value;
+
+var table = document.getElementById("table");
+var newRow = table.insertRow(table.rows.length);
+var cell1 = newRow.insertCell(0);
+var cell2 = newRow.insertCell(1);
+cell1.innerHTML = "Full Name";
+cell2.innerHTML = fullName;
+
+    newRow = table.insertRow(table.rows.length);
+    cell1 = newRow.insertCell(0);
+    cell2 = newRow.insertCell(1);
+    cell1.innerHTML = "Email";
+    cell2.innerHTML = email;
+
+    newRow = table.insertRow(table.rows.length);
+    cell1 = newRow.insertCell(0);
+    cell2 = newRow.insertCell(1);
+    cell1.innerHTML = "Phone";
+    cell2.innerHTML = phone;
+
+    newRow = table.insertRow(table.rows.length);
+    cell1 = newRow.insertCell(0);
+    cell2 = newRow.insertCell(1);
+    cell1.innerHTML = "State";
+    cell2.innerHTML = state;
+}
+
+function cancelSubmit() {
+    document.getElementById("confirmation").style.display = "none";
+}
+</script>
+</center>
+</body>
+</html> 
+
