@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tables</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+    table {
+      margin-top: 20px;
+    }
+.form-control{
+  max-width: 350px;
+}
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+    <center>
+    <h2 class="text-center mb-4">Multiplication Tables</h2>
+    <div class="form-group">
+      
+      <label class="input" for="numberInput">Enter a number:</label>
+      <input type="number" class="form-control" id="numberInput">
+    </div>
+    <button type="button" class="btn btn-primary" onclick="generateTables()">Generate</button>
+
+  
+    <div id="tables"></div>
+  </center>
+  </div>
+  <script>
+    function generateTables() {
+      document.getElementById('tables').innerHTML = '';
+
+      var numberInput = document.getElementById('numberInput').value;
+
+      if (!numberInput || isNaN(numberInput)) {
+        alert('Please enter a valid number.');
+        return;
+      }
+
+        numberInput = parseInt(numberInput);
+
+        var tablesHTML = '';
+
+      tablesHTML += '<h4>Using For Loop</h4>';
+      tablesHTML += '<table class="table table-bordered">';
+      for (var i = 1; i <= 10; i++) {
+        tablesHTML += '<tr><td>' + numberInput + ' x ' + i + ' = ' + (numberInput * i) + '</td></tr>';
+      }
+      tablesHTML += '</table>';
+
+      tablesHTML += '<h4>Using While Loop</h4>';
+      tablesHTML += '<table class="table table-bordered">';
+      var j = 1;
+      while (j <= 10) {
+        tablesHTML += '<tr><td>' + numberInput + ' x ' + j + ' = ' + (numberInput * j) + '</td></tr>';
+        j++;
+      }
+      tablesHTML += '</table>';
+
+      tablesHTML += '<h4>Using Do-While Loop</h4>';
+      tablesHTML += '<table class="table table-bordered">';
+      var k = 1;
+      do {
+        tablesHTML += '<tr><td>' + numberInput + ' x ' + k + ' = ' + (numberInput * k) + '</td></tr>';
+        k++;
+      } while (k <= 10);
+      tablesHTML += '</table>';
+
+  document.getElementById('tables').innerHTML = tablesHTML;
+    }
+  </script>
+</body>
+</html>
