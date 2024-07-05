@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Slideshow</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .slideshow-container {
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+    .slideshow-image {
+      max-width: 100%;
+    }
+
+h2{
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+  </style>
+</head>
+<body>
+  <center><h2>SLIDESHOW</h2></center>
+  
+  <div class="container mt-5">
+    <div class="slideshow-container">
+      <img src="images/pic1.jpg" class="slideshow-image img-fluid" onclick="nextSlide()">
+    </div>
+  </div>
+
+  
+  <script>
+    var currentIndex = 0; 
+
+    var images = [
+      "images/pic1.jpg",
+      "images/pic2.jpg",
+      "images/pic3.jpg",
+      "images/pic4.jpg",
+      "images/pic5.jpg",
+    ];
+
+    function nextSlide() {
+      currentIndex++; 
+
+      if (currentIndex >= images.length) {
+        currentIndex = 0; 
+      }
+
+      document.querySelector('.slideshow-image').src = images[currentIndex];
+    }
+  </script>
+</body>
+</html>
