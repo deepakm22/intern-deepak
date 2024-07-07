@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECRET CODE GAME</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #f39a9a; 
+        }
+        .game-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff9f9; 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+            text-align: left; 
+            text-align: center;
+        }
+
+h1{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+        .result-text {
+            font-weight: bold;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        #secretNumberInput,
+        #game {
+            margin-top: 20px; 
+        }
+        #result {
+            font-size: 1.2em; 
+        }
+        #attempts {
+            color: #666; 
+        }
+    </style>
+    
+</head>
+<body>
+        <div class="container game-container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="title">SECRET CODE GAME</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="secretNumberInput">
+                        <p class="lead">Enter the secret 4-digit number:</p>
+                        <div class="input-group mb-3">
+                            <input type="password" id="secretNumber" class="form-control" maxlength="4">
+                        </div>
+                        <div class="input-group ">
+                            <div class="input-group-append">
+                                <button id="setSecretNumberBtn" class="btn btn-primary" style="background-color: rgb(58, 207, 233);">Set Secret Number</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="game" class="hidden">
+                        <p class="lead">Guess the 4-digit number:</p>
+                        <div class="input-group ">
+                            <input type="text" id="guess" class="form-control" maxlength="4">
+                        </div>
+                        <div class="input-group ">
+                            <div class="input-group-append">
+                                <button id="guessBtn" class="btn btn-success" style="background-color: rgb(58, 207, 233);">Guess</button>
+                            </div>
+                        </div>
+                        <div id="result" ></div>
+                        <div id="attempts" class="font-weight-bold"></div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </body>
+    
+    <script>
+        var secretNumber;
+        var attempts = 0;
+
+        var setSecretNumberBtn = document.getElementById('setSecretNumberBtn');
+        var guessBtn = document.getElementById('guessBtn');
+
+        var setSecretNumber = function () {
+            var input = document.getElementById('secretNumber').value;
+            if (validateNumber(input)) {
+                secretNumber = input;
+                document.getElementById('secretNumberInput').classList.add('hidden');
+                document.getElementById('game').classList.remove('hidden');
+                console.log('Secret number set to ' + secretNumber);
+            } else {
+                alert('Please enter a valid 4-digit number with unique digits.');
+            }
+        };
+
+        var validateNumber = function (number) {
+            if (number.length !== 4 || !/^\d+$/.test(number)) {
+                return false;
+            }
+            var uniqueDigits = {};
+            for (var i = 0; i < number.length; i++) {
+                if (uniqueDigits[number[i]]) {
+                    return false;
+                }
+                uniqueDigits[number[i]] = true;
+            }
+            return true;
+        };
+
+        var makeGuess = function () {
+            var guess = document.getElementById('guess').value;
+            if (!validateNumber(guess)) {
+                alert('Please enter a valid 4-digit number with unique digits.');
+                return;
+            }
+            attempts++;
+            var result = calculateBullsAndCows(secretNumber, guess);
+            var bulls = result.bulls;
+            var cows = result.cows;
+            var resultElement = document.getElementById('result');
+            var attemptsElement = document.getElementById('attempts');
+
+            var resultText = document.createElement('p');
+            resultText.classList.add('result-text');
+            resultText.innerText = bulls + ' Bulls and ' + cows + ' Cows';
+            resultElement.appendChild(resultText);
+
+            if (bulls === 4) {
+                var winText = document.createElement('p');
+                winText.innerHTML = 'You\'ve guessed the Correct number <strong>' + secretNumber + '</strong>.';
+                resultElement.appendChild(winText);
+            }
+
+            attemptsElement.innerText = 'Attempts: ' + attempts;
+        };
+
+        var calculateBullsAndCows = function (secret, guess) {
+            var bulls = 0;
+            var cows = 0;
+            for (var i = 0; i < 4; i++) {
+                if (secret[i] === guess[i]) {
+                    bulls++;
+                } else if (secret.indexOf(guess[i]) !== -1) {
+                    cows++;
+                }
+            }
+            return { bulls: bulls, cows: cows };
+        };
+
+        setSecretNumberBtn.addEventListener('click', setSecretNumber);
+        guessBtn.addEventListener('click', makeGuess);
+    </script>
+</body>
+</html>
