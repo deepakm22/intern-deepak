@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information</title>
+</head>
+<body>
+    <h1>INFORMATION</h1>
+
+<script>
+
+    
+class employee{
+    constructor(Name,Year_of_joining,Salary,Address){
+        this.Name = Name;
+        this.Year_of_joining = Year_of_joining;
+        this.Salary = Salary;
+        this.Address = Address;
+    
+    }
+
+employeeDetails(){
+    console.log(this.Name +" " + this.Year_of_joining + " " + this.Address)
+}
+
+}
+
+let deepak = new employee("Deepak",2024,7000,"mettupalayam")
+let batcha = new employee("Batcha",2024,7000,"mettupalayam")
+let jeeva = new employee("Jeeva",2021,17000,"mettupalayam")
+let arul = new employee("Arul",2020,16000,"mettupalayam")
+
+
+deepak.employeeDetails()
+batcha.employeeDetails()
+jeeva.employeeDetails()
+arul.employeeDetails()
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
