@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .box {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <center> <h1>ONLY INTEGER</h1></center>
+        <form id="integer-value">
+            <div class="box">
+                <label for="inputA">Input</label>
+                <input type="text" class="form-control" id="inputA" placeholder="Enter first integer">
+            </div>
+            <button type="submit" class="btn btn-primary" id="result">Calculate</button>
+        </form>
+    </div>
+
+    <script>
+        const test_btn = document.getElementById("result")
+        let valid = () => {
+            let a = document.getElementById('inputA').value
+            if (!isNaN(a)) {
+                console.log('Input is a Number :' + a)
+            }else{
+                console.log('Input is a String :' + a)
+            }
+        
+            }
+            
+            test_btn.addEventListener('click' , valid)
+        
+    </script>
+</body>
+</html>

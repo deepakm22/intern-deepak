@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Swapper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            max-width: 400px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NAME SWAP</h1>
+        <form id="nameForm">
+            <div class="form-group">
+                <input type="text" class="form-control" id="inputName" placeholder="Enter your name">
+            </div>
+            <button type="submit" class="btn btn-primary" id="result">Swap</button>
+        </form>
+    </div>
+
+    <script>
+
+const test_btn = document.getElementById('result')
+
+const swap =() => {
+        const a = document.getElementById('inputName').value
+
+        const b = a.split('')
+        for(let i=0 ; i<b.length ; i+=3)
+        {
+            [b[i] , b[i+1] ] =  [b[i+1] , b[i]]
+        }
+        const c=b.join('')
+
+        alert("Given input :" + " " + a + " " + "Swapped Value :"  +c)
+    }
+        test_btn.addEventListener('click' , swap)
+
+
+    </script>
+
+</body>
+</html>
