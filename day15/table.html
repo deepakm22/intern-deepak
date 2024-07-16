@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee <Details></Details></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <center>
+        <h2>Employee Data</h2>
+    </center>
+        <table id="employeeTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Job Title</th>
+                    <th>Name</th>
+                    <th>Employee Code</th>
+                    <th>Phone Number</th>
+                    <th>Email Address</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            const employees = data.Employees;
+
+            const tableBody = document.getElementById('employeeTableBody');
+
+            employees.forEach(employee => {
+                const row = document.createElement('tr');
+
+                const userIdCell = document.createElement('td');
+                userIdCell.textContent = employee.userId;
+                row.appendChild(userIdCell);
+
+                const jobTitleCell = document.createElement('td');
+                jobTitleCell.textContent = employee.jobTitle;
+                row.appendChild(jobTitleCell);
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = employee.name;
+                row.appendChild(nameCell);
+
+                const employeeCodeCell = document.createElement('td');
+                employeeCodeCell.textContent = employee.employeeCode;
+                row.appendChild(employeeCodeCell);
+
+                const phoneNumberCell = document.createElement('td');
+                phoneNumberCell.textContent = employee.phoneNumber;
+                row.appendChild(phoneNumberCell);
+
+                const emailCell = document.createElement('td');
+                emailCell.textContent = employee.emailAddress;
+                row.appendChild(emailCell);
+
+                tableBody.appendChild(row);
+            });
+        })
+});    
+    </script> 
+</body>
+</html>

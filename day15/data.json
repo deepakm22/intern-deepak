@@ -1,0 +1,51 @@
+
+    {
+        "Employees": 
+        [
+        {
+        "userId": "101",
+        "jobTitle": "Developer",
+        "name": "Vijay",
+        "employeeCode": "E154",
+        "phoneNumber": "123456",
+        "emailAddress": "vijay123@gmail.com"
+        },
+        {
+        "userId": "102",
+        "jobTitle": "Developer",
+        "name": "Vimal",
+        "employeeCode": "E265",
+        "phoneNumber": "123456",
+        "emailAddress": "vimal123@gmail.com"
+
+        },
+        {
+            "userId": "103",
+            "jobTitle": "Developer",
+            "name": "Karthi",
+            "employeeCode": "E376",
+            "phoneNumber": "123456",
+            "emailAddress": "karthi123@gmail.com"
+    
+            },
+            {
+                "userId": "104",
+                "jobTitle": "Developer",
+                "name": "Arun",
+                "employeeCode": "E487",
+                "phoneNumber": "123456",
+                "emailAddress": "arun123@gmail.com"
+        
+                },
+                {
+                    "userId": "105",
+                    "jobTitle": "Developer",
+                    "name": "Leo",
+                    "employeeCode": "E598",
+                    "phoneNumber": "123456",
+                    "emailAddress": "leo123@gmail.com"
+            
+                    }
+
+            ]
+            }
