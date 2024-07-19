@@ -1,6 +1,8 @@
 
-import { typeNote, createNote, editNoteText } from './notes.js';
+import { typeNote, createNote, editNoteText  } from './notes.js';
 import { loadNotesFromLocalStorage, deleteNoteFromLocalStorage } from './local.js';
+
+
 
 document.addEventListener("DOMContentLoaded", function() {
     loadInitialNotes();
