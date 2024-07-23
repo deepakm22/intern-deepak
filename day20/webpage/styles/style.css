@@ -4,7 +4,9 @@
     font-size: x-large;
     padding: 20px;
 }
-
+header{
+    position: sticky;
+}
 .navbar-nav .nav-link {
     font-size: 1.1rem;
     margin-right: 10px;
