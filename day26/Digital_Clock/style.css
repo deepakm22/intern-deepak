@@ -113,9 +113,6 @@ h1{
     z-index: 1;
     
 }
-/* #ampm{
-    font-size: xx-large;
-} */
 
 @media (max-width: 890px){
     .container{
