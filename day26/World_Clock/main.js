@@ -14,8 +14,6 @@ updateClocks = () => {
         'Dubai' : 4 * 60 * 60 * 1000,
         'Moscow' : 3 * 60 * 60 * 1000,
         'New Delhi' : 5.5 * 60 * 60 * 1000  
-  
-  
     };
 
     const newYorkTime = new Date(now.getTime() + offsets['New York']);
