@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', async (event) => {
         event.preventDefault();
 
-        // Get the values from the form
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
@@ -31,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const user = Object.values(users).find(user => user.Email === email && user.Password === password);
 
             if (user) {
-                window.location.href = "/month-project/shopping_cart/home"; // Replace with your actual redirect URL
+                window.location.href = "/month-project/shopping_cart/home"; 
             } else {
                 alert('Invalid email or password.');
             }
@@ -47,23 +46,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// const button = document.getElementById('submit');
 
-// const validateForm = async () => {
-
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     if (!emailRegex.test(email)) {
-//         alert('Please enter a valid email address.');
-//         return false;
-//     }
-
-//     if (password.length < 6) {
-//         alert('Password must be at least 6 characters long.');
-//         return false;
-//     }
-
-//             return true;
-
-// };
-
-// button.addEventListener('click', validateForm);

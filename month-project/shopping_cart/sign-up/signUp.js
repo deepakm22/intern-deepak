@@ -55,12 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
             signUpForm.reset()
         }
     })
-
-    
-
-
-    
-
 })
 
 
