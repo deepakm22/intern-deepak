@@ -9,12 +9,16 @@ const validateForm = () =>{
         alert('Please fill in all fields.');
         return false;
     }
+    if (password.length < 6) {
+        alert('Password must be at least 6 characters long.');
+        return false;
+    }
     if(password !== conform_password){
         alert('Password does not match. ')
         return false
-    }
+    }else{
     alert('Form submitted successfully');
-
+}
 
 
     const user = {
