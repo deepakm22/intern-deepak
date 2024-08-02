@@ -25,7 +25,8 @@ const validateForm = () =>{
         Username: username,
         Email: email,
         Password: password,
-        Conform_password: conform_password
+        Conform_password: conform_password,
+        isAdmin: false
     }
     const url = "https://shopping-cart-912ad-default-rtdb.firebaseio.com/signup.json"
 

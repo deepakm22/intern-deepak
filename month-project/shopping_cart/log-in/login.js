@@ -27,10 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const users = await response.json();
-            const user = Object.values(users).find(user => user.Email === email && user.Password === password);
+            const user = Object.values(users).find(user => user.Email === email && user.Password === password );
+
 
             if (user) {
-                window.location.href = "/month-project/shopping_cart/home"; 
+                if (user.isAdmin) {
+                    window.location.href = "/month-project/shopping_cart/admin_page";
+                } else {
+                    window.location.href = "/month-project/shopping_cart/home";
+                }
             } else {
                 alert('Invalid email or password.');
             }
