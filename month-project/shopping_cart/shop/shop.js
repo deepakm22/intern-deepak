@@ -13,6 +13,7 @@ async function fetchProducts() {
         console.error('Error fetching products:', error);
         alert('Failed to fetch products');
     }
+    
 }
 
 // Display 

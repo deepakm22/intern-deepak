@@ -71,7 +71,7 @@ function getFile(event) {
 
 document.getElementById('upload-image').addEventListener('change', getFile);
 
-// display 
+// Display 
 
 async function fetchProducts() {
     try {
@@ -90,7 +90,7 @@ async function fetchProducts() {
     }
 }
 
-// Display 
+
 
 function displayProducts(products) {
     const container = document.getElementById('product1');
