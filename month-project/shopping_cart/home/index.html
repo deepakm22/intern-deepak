@@ -9,33 +9,35 @@
     <link rel="stylesheet" href="ui.css">
 </head>
 <body>
-<section id="header">
-    <a href="#"><img src="assects/images/home/logo2.png" class="logo" alt="" style="height: 70px; width: 200px;"></a>
-
-    <div>
-        <ul id="navbar">
-            <li><a class="active" href="index.html">Home</a></li>
-            <li><a href="../shop/">Shop</a></li>
-            <li><a href="../blog/blog.html">Blog</a></li>
-            <li><a href="../about/about.html">About</a></li>
-            <li><a href="../contact/contact.html">Contact</a></li>
-            <li id="lg-bag"><a href="../shop/cart.html"><i class="fa-solid fa-bag-shopping" ></i></a></li>
-            <li class="dropdown">
-                <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
-                <div class="dropdown-content">
-                    <a href="../log-in/">Login</a>
-                    <a href="../sign-up/">Signup</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div id="mobile">
-        <a href="cart.html"><i class="fa-solid fa-bag-shopping" style="color: black;" ></i></a>
-        <i id="bar" class="fa-solid fa-outdent" ></i>
-
-    </div>
-
-</section>
+    <section id="header">
+        <a href="#"><img src="assects/images/home/logo2.png" class="logo" alt="" style="height: 70px; width: 200px;"></a>
+    
+        <div>
+            <ul id="navbar">
+                <li id="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" name="search" placeholder="Search...">
+                        <button type="submit"><i class="fa-solid fa-search"></i></button>
+                    </form>
+                </li>
+                <li><a class="active" href="index.html">Home</a></li>
+                <li><a href="../shop/">Shop</a></li>
+                <li><a href="../about/about.html">About</a></li>
+                <li><a href="#footer">Contact</a></li>
+                <li id="lg-bag"><a href="../shop/cart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="../log-in/" id="login-link">Login</a>
+                        <a href="../sign-up/" id="signup-link">Signup</a>
+                        <a href="#" id="logout-link" style="display: none;">Log out</a>
+                        <span id="user-email" style="display: none;"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
 
 <section id="hero">
     <h4>Trade in offer</h4>
@@ -405,7 +407,7 @@
     </div>
 </section>
 
-<footer class="section-p1">
+<footer class="section-p1" id="footer">
     <div class="col">
         <img class="logo" src="assects/images/home/logo2.png" alt="" style="height: 100px; width: 180px;">
         <h5> <strong>Contact</strong></h5>
@@ -413,7 +415,7 @@
         <p><strong>Phone:</strong> 7094810218</p>
         <div class="follow">
             <div class="icon">
-                <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-facebook"></i>
                 <i class="fa-brands fa-instagram"></i>
                 <i class="fa-brands fa-twitter"></i>
                 <i class="fa-brands fa-youtube"></i>
@@ -444,15 +446,17 @@
     </div>
 </footer>
 
+
+
+
 <script>
 const shop_now = document.getElementById('shop-now')
 shop_now.addEventListener('click', () => {
     window.location.href = "/month-project/shopping_cart/shop/"
 })
 
-
-
 </script>
     
+<script src="home.js"></script>
 </body>
 </html>

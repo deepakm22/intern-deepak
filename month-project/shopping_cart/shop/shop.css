@@ -19,11 +19,60 @@
 #lg-bag a i::after {
     content: attr(data-count);
     position: absolute;
-    top: -8px;
+    top: -13px;
     right: -8px;
-    background-color: red;
+    background-color: rgb(29, 4, 119);
     color: white;
     font-size: 12px;
     padding: 2px 6px;
     border-radius: 50%;
+}
+
+
+#search-bar {
+    position: relative;
+    margin: 0 20px; 
+}
+
+#search-bar form {
+    display: flex;
+    align-items: center;
+}
+
+#search-bar input[type="text"] {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease, width 0.3s ease;
+    width: 110px; 
+    background: #e9e7e7; 
+}
+
+#search-bar input[type="text"]:focus {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); 
+    width: 220px; 
+}
+
+#search-bar button {
+    position: absolute;
+    right: 10px;
+    background: #8e8f8f; 
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#search-bar button i {
+    color: white; 
+    font-size: 16px; 
 }

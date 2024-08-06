@@ -1,7 +1,8 @@
 document.getElementById('adminForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const productId = document.getElementById('productId').value; 
+    const productIdElement = document.getElementById('productId');
+    const productId = productIdElement ? productIdElement.value : null;
     const productName = document.getElementById('productName').value;
     const price = document.getElementById('price').value;
     const productDescription = document.getElementById('productDescription').value;
@@ -19,11 +20,11 @@ document.getElementById('adminForm').addEventListener('submit', async (event) =>
 
     try {
         let productURL = 'https://shopping-cart-912ad-default-rtdb.firebaseio.com/products.json';
-        let method = 'POST'; 
+        let method = 'POST';
 
         if (productId) {
-            productURL += `/${productId}.json`;
-            method = 'PUT'; 
+            productURL = `https://shopping-cart-912ad-default-rtdb.firebaseio.com/products/${productId}.json`;
+            method = 'PUT';
         }
 
         const response = await fetch(productURL, {
@@ -38,13 +39,9 @@ document.getElementById('adminForm').addEventListener('submit', async (event) =>
         });
 
         if (response.ok) {
-            if (productId) {
-                alert('Product updated successfully');
-            } else {
-                alert('Product added successfully');
-            }
-            document.getElementById('adminForm').reset(); 
-            fetchProducts(); 
+            alert(productId ? 'Product updated successfully' : 'Product added successfully');
+            document.getElementById('adminForm').reset();
+            fetchProducts();
         } else {
             alert('Error occurred while adding/updating the product');
         }
@@ -54,7 +51,7 @@ document.getElementById('adminForm').addEventListener('submit', async (event) =>
     }
 });
 
-// upload 
+// upload
 function getFile(event) {
     const file = event.target.files[0];
 
@@ -71,8 +68,7 @@ function getFile(event) {
 
 document.getElementById('upload-image').addEventListener('change', getFile);
 
-// Display 
-
+// Display
 async function fetchProducts() {
     try {
         const productURL = 'https://shopping-cart-912ad-default-rtdb.firebaseio.com/products.json';
@@ -89,8 +85,6 @@ async function fetchProducts() {
         alert('Failed to fetch products');
     }
 }
-
-
 
 function displayProducts(products) {
     const container = document.getElementById('product1');
@@ -118,7 +112,7 @@ function displayProducts(products) {
                     </div>
                     <h4>Rs ${product.price}</h4>
                     <button onclick="editProduct('${key}')">Edit</button>
-                    <button onclick="deleteProduct('${key}')">Delete</button>
+                    <button onclick="deleteProduct('${key}')" id="delete">Delete</button>
                 </div>
             `;
 
@@ -128,22 +122,36 @@ function displayProducts(products) {
 }
 
 // Edit
+window.editProduct = function(productId) {
+    const productURL = `https://shopping-cart-912ad-default-rtdb.firebaseio.com/products/${productId}.json`;
 
-function editProduct(productId) {
-    const product = products[productId]; 
-    if (product) {
+    fetch(productURL)
+    .then(response => response.json())
+    .then(product => {
         document.getElementById('productId').value = productId;
         document.getElementById('productName').value = product.productName;
-        document.getElementById('price').value = product.price;
         document.getElementById('productDescription').value = product.productDescription;
+        document.getElementById('price').value = product.price;
         document.getElementById('upload-image').dataset.url = product.url;
-    } else {
-        console.error('Product not found:', productId);
-        alert('Product not found. Please try again.');
-    }
+    })
+    .catch(error => console.error('Error fetching product:', error));
 }
 
-//  Delete 
+document.getElementById('upload-image').addEventListener('change', (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onloadend = function () {
+            document.getElementById('upload-image').dataset.url = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+
+// Delete
 async function deleteProduct(productId) {
     if (confirm('Are you sure you want to delete this product?')) {
         try {
@@ -154,7 +162,7 @@ async function deleteProduct(productId) {
 
             if (response.ok) {
                 alert('Product deleted successfully');
-                fetchProducts(); 
+                fetchProducts();
             } else {
                 alert('Error occurred while deleting the product');
             }

@@ -27,17 +27,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const users = await response.json();
-            const user = Object.values(users).find(user => user.Email === email && user.Password === password );
-
+            const user = Object.values(users).find(user => user.Email === email && user.Password === password);
 
             if (user) {
+                console.log('Login successful for user:', user);
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('isAdmin', user.isAdmin);
+                localStorage.setItem('isLoggedIn', 'true');
+                
                 if (user.isAdmin) {
                     window.location.href = "/month-project/shopping_cart/admin_page";
                 } else {
-                    window.location.href = "/month-project/shopping_cart/home";
+                    window.location.href = "../home/";
                 }
             } else {
-                alert('Invalid email or password.');
+                alert('This user is not available, please sign up first.');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -45,10 +49,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-
-
-
-
-
-

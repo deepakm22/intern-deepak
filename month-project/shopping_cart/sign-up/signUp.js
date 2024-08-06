@@ -1,9 +1,8 @@
-const validateForm = () =>{
+const validateForm = () => {
     var username = document.getElementById('username').value;
     var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value
-    var conform_password = document.getElementById('conform_password').value    
-
+    var password = document.getElementById('password').value;
+    var conform_password = document.getElementById('conform_password').value;
 
     if (username.trim() === '' || email.trim() === '' || password.trim() === '' || conform_password.trim() === '') {
         alert('Please fill in all fields.');
@@ -13,13 +12,10 @@ const validateForm = () =>{
         alert('Password must be at least 6 characters long.');
         return false;
     }
-    if(password !== conform_password){
-        alert('Password does not match. ')
-        return false
-    }else{
-    alert('Form submitted successfully');
-}
-
+    if (password !== conform_password) {
+        alert('Password does not match.');
+        return false;
+    }
 
     const user = {
         Username: username,
@@ -27,35 +23,40 @@ const validateForm = () =>{
         Password: password,
         Conform_password: conform_password,
         isAdmin: false
-    }
-    const url = "https://shopping-cart-912ad-default-rtdb.firebaseio.com/signup.json"
+    };
 
-    
-    fetch(url,{method: 'POST' , headers: {
-        'Content-type' : 'application/json'
-    },
-    body: JSON.stringify(user)
-})
+    const url = "https://shopping-cart-912ad-default-rtdb.firebaseio.com/signup.json";
 
-.then(Response => Response.json())
-.then(data => console.log('Success: ', data))
-.catch(error => console.log('Error:', error))
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        alert('Sign-up Successfully');
+        window.location.href = "../home/"; 
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while signing up. Please try again later.');
+    });
 
-return true
-
-
-}
+    return true;
+};
 
 document.addEventListener('DOMContentLoaded', () => {
-    const signUpForm = document.querySelector('form')
+    const signUpForm = document.querySelector('form');
 
     signUpForm.addEventListener('submit', (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
-        if(validateForm()){
-            signUpForm.reset()
+        if (validateForm()) {
+            signUpForm.reset();
         }
-    })
-})
-
-
+    });
+});
