@@ -167,3 +167,12 @@ body {
 #delete{
     background-color: red;
 }
+
+#logout-button{
+    background-color: #4CAF50;
+    border: none;
+    margin-top: 10px;
+    margin-left: 1300px;
+    font-size: 20px;
+    
+}

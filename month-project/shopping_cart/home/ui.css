@@ -93,6 +93,7 @@ body{
     position: sticky;
     top: 0;
     left: 0;
+    height: 80px;
 }
 
 #navbar{
@@ -596,13 +597,16 @@ footer a{
 
 footer .follow{
     margin-top: 20px;
+    
 }
 
 footer .follow i{
     margin-top: 20px;
     padding-right: 4px;
     cursor: pointer;
+
 }
+
 
 
 /* Shop page */

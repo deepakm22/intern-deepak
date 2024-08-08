@@ -63,6 +63,8 @@
         .btn-place-order:hover {
             background-color: #ec971f;
         }
+
+        
     </style>
 </head>
 <body>
@@ -75,7 +77,6 @@
                 <li><a href="../about/about.html">About</a></li>
                 <li><a href="../contact/contact.html">Contact</a></li>
                 <li id="lg-bag"><a href="cart.html" class="active"><i class="fa-solid fa-bag-shopping" data-count="0"></i></a></li>
-                <a href="#" id="close"><i class="fa-solid fa-xmark" style="color: black;"></i></a>
                 <li class="dropdown">
                     <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
                     <div class="dropdown-content">
@@ -89,33 +90,20 @@
     </section>
 
     <section id="page-header">
-        <h2>Your Shopping Cart</h2>
+        <h2>Your Cart</h2>
         <p>Review your items before proceeding to checkout.</p>
     </section>
 
-    <section id="cart-item" class="container mt-4">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="cart-item d-flex">
-                    <img src="../assects/images/products/f6.jpg" alt="Product Name">
-                    <div class="cart-item-details">
-                        <h5>Product Name</h5>
-                        <p>Price: Rs:1999</p>
-                        <p>Quantity: 2</p>
-                        <div class="cart-item-actions">
-                            <button>Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section id="cart-container" class="container mt-4">
+    
 
-        <div class="cart-total">
-            <h4>Total: Rs:3998</h4>
-            <button class="btn-place-order">Place Order</button>
-        </div>
+
     </section>
 
+    <div class="cart-total">
+        <h4>Total: Rs:3998</h4>
+        <button class="btn-place-order">Place Order</button>
+    </div>
     <section id="newsletter" class="section-p1">
         <div class="newstect">
             <h4>Sign Up for News Letters</h4>
@@ -157,5 +145,55 @@
             <a href="#">Help</a>
         </div>
     </footer>
+
+    <script>
+    window.onload = () => {
+    const cartContainer = document.getElementById('cart-container');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const updateCartDisplay = () => {
+        cartContainer.innerHTML = ''; // Clear the current cart display
+        if (cart.length === 0) {
+            cartContainer.innerHTML = '<p>Your cart is empty!</p>';
+        } else {
+            cart.forEach(product => {
+                cartContainer.innerHTML += `
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="cart-item d-flex" data-product-id="${product.id}">
+                                <img src="${product.image}" alt="${product.name}">
+                                <div>
+                                    <h5>${product.name}</h5>
+                                    <p>Rs ${product.price}</p>
+                                    <div class="cart-item-actions">
+                                        <button class="remove-btn" data-product-id="${product.id}">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    };
+
+    const removeProductFromCart = (productId) => {
+        cart = cart.filter(product => product.id !== productId); // Remove the product from the cart
+        localStorage.setItem('cart', JSON.stringify(cart)); // Update local storage
+        updateCartDisplay(); // Refresh the cart display
+    };
+
+    cartContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('remove-btn')) {
+            const productId = event.target.getAttribute('data-product-id');
+            removeProductFromCart(productId); // Call function to remove product
+        }
+    });
+
+    updateCartDisplay(); // Initial display of the cart
+};
+
+
+    </script>
 </body>
 </html>

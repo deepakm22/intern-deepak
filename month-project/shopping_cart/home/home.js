@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userEmail = localStorage.getItem('userEmail');
 
     if (isLoggedIn) {
-        loginLink.style.display = 'none';
+        loginLink.style.display = 'none';   
         signupLink.style.display = 'none';
         logoutLink.style.display = 'block';
         userEmailElement.style.display = 'block';
@@ -23,42 +23,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function renderSearchResults(items) {
-    searchResults.innerHTML = '';
-    items.forEach(item => {
-        const resultCard = document.createElement('div');
-        resultCard.classList.add('search-result-card');
-        resultCard.dataset.id = item.id;
-        resultCard.innerHTML = `
-            <img src="${item.imageUrl || 'default-image.jpg'}" alt="${item.name}">
-            <h4>${item.name}</h4>
-        `;
-        resultCard.addEventListener('click', () => {
-            window.location.href = `result.html?query=${encodeURIComponent(item.name)}`;
-        });
-        searchResults.appendChild(resultCard);
-    });
-    searchResults.classList.remove('hidden');
-}
 
-async function handleSearch() {
-    const searchTerm = searchBar.value.toLowerCase();
-    if (searchTerm) {
-        console.log('Search term:', searchTerm);
-        const items = await getFromDatabase('items');
-        if (items) {
-            const filteredItems = Object.values(items).filter(item => item.name.toLowerCase().includes(searchTerm));
-            console.log('Filtered items:', filteredItems);
+const fb = document.getElementById("fb")
+const insta = document.getElementById("insta")
+const twiter = document.getElementById("twiter")
+const ytube = document.getElementById("ytube")
 
-            // Sort by relevance (length of the match could be a heuristic)
-            filteredItems.sort((a, b) => b.name.toLowerCase().indexOf(searchTerm) - a.name.toLowerCase().indexOf(searchTerm));
+fb.addEventListener('click', () => {
+    window.location.href = "https://www.facebook.com/"
+})
 
-            renderSearchResults(filteredItems);
-        }
-    } else {
-        searchResults.innerHTML = '';
-        searchResults.classList.add('hidden');
-    }
-}
+insta.addEventListener('click', () => {
+    window.location.href = "https://www.instagram.com/"
+})
 
-searchBar.addEventListener('input', handleSearch);
+twiter.addEventListener('click', () => {
+    window.location.href = "https://twitter.com/"
+})
+
+ytube.addEventListener('click', () => {
+    window.location.href = "https://www.youtube.com/"
+})

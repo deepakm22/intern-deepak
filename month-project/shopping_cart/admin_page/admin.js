@@ -68,7 +68,7 @@ function getFile(event) {
 
 document.getElementById('upload-image').addEventListener('change', getFile);
 
-// Display
+
 async function fetchProducts() {
     try {
         const productURL = 'https://shopping-cart-912ad-default-rtdb.firebaseio.com/products.json';
@@ -174,3 +174,17 @@ async function deleteProduct(productId) {
 }
 
 window.onload = fetchProducts;
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+    const logoutButton = document.getElementById('logout-button');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            console.log('Logout button clicked.');
+            window.location.href = '/month-project/shopping_cart/home/';
+                });
+    }
+
+    
+});

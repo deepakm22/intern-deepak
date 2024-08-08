@@ -2,7 +2,7 @@
 /* Our Story */
 #our-story {
     padding: 40px 20px;
-    background: #fcfbfb;
+    background: #fff;
     text-align: center;
 }
 
@@ -29,7 +29,7 @@
 /* Why Choose Us */
 #why-choose-us {
     padding: 40px 20px;
-    background: #f5f5f5;
+    background: #fff;
     text-align: center;
 }
 
@@ -84,7 +84,7 @@
 .team {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
     justify-content: center;
 }
 
@@ -123,7 +123,7 @@
 /* Testimonials */
 #testimonials {
     padding: 40px 20px;
-    background: #f5f5f5;
+    background: #fff;
     text-align: center;
 }
 
