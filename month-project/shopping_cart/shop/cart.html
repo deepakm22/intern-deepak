@@ -8,6 +8,20 @@
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="../home/ui.css">
     <style>
+#lg-bag a i {
+    position: relative;
+}
+#lg-bag a i::after {
+    content: attr(data-count);
+    position: absolute;
+    top: -13px;
+    right: -8px;
+    /* background-color: rgb(29, 4, 119); */
+    color: rgb(39, 39, 39);
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
         .cart-item {
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -45,24 +59,37 @@
         .cart-item-actions button:hover {
             background-color: #ec971f;
         }
-        .cart-total {
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-            margin-top: 20px;
-            text-align: right;
-        }
-        .btn-place-order {
-            background-color: #f0ad4e;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1.1rem;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn-place-order:hover {
-            background-color: #ec971f;
-        }
+
+#total-price {
+    font-size: 1.5rem;  
+    font-weight: bold;   
+    color: #333;         
+    margin-top: 20px;    
+    padding: 10px;       
+    border: 2px ;  
+    border-radius: 5px; 
+    background-color: #e7f1ff;  
+    text-align: center;   
+}
+
+#place-order {
+    background-color: #007bff;  
+    color: white;                
+    border: none;                
+    border-radius: 5px;        
+    padding: 10px 20px;         
+    font-size: 1rem;            
+    cursor: pointer;             
+    transition: background-color 0.3s; 
+    display: inline-block;       
+    margin-top: 20px;  
+    align-items: center;        
+}
+
+/* Button hover effect */
+#place-order:hover {
+    background-color: #0056b3;  
+}
 
         
     </style>
@@ -80,8 +107,10 @@
                 <li class="dropdown">
                     <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
                     <div class="dropdown-content">
-                        <a href="../log-in/">Login</a>
-                        <a href="../sign-up/">Signup</a>
+                        <a href="../log-in/" id="login-link">Login</a>
+                        <a href="../sign-up/" id="signup-link">Signup</a>
+                        <a href="#" id="logout-link" style="display: none;">Log out</a>
+                        <span id="user-email" style="display: none;"></span>
                     </div>
                 </li>
             </ul>
@@ -100,10 +129,10 @@
 
     </section>
 
-    <div class="cart-total">
-        <h4>Total: Rs:3998</h4>
-        <button class="btn-place-order">Place Order</button>
-    </div>
+    <div id="cart-container"></div>
+    <div id="total-price">Total Price: Rs 0</div>
+    <button id="place-order" >Place Order</button>
+    
     <section id="newsletter" class="section-p1">
         <div class="newstect">
             <h4>Sign Up for News Letters</h4>
@@ -111,89 +140,45 @@
         </div>
     </section>
 
-    <footer class="section-p1">
+    <footer class="section-p1" id="footer">
         <div class="col">
             <img class="logo" src="../assects/images/home/logo2.png" alt="" style="height: 100px; width: 180px;">
-            <h5><strong>Contact</strong></h5>
-            <p><strong>Address:</strong> 564 Karamadai Road, Mettupalayam, Coimbatore</p>
-            <p><strong>Phone:</strong> 7094810218</p>
+            <h5> <strong>Contact</strong></h5>
+            <a href="https://maps.app.goo.gl/yscTMgHowyhDy4Ff8"><p><strong>Address:</strong> 564 Karamadai Road, Mettupalayam , Coimbatore</p></a>
+            <a href="tel:+91-709-481-0218"> <p><strong>Phone:</strong> 7094810218</p></a>
             <div class="follow">
                 <div class="icon">
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-twitter"></i>
-                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-facebook" id="fb"></i>
+                    <i class="fa-brands fa-instagram" id="insta"></i>
+                    <i class="fa-brands fa-twitter" id="twiter"></i>
+                    <i class="fa-brands fa-youtube" id="ytube"></i>
+    
                 </div>
+    
             </div>
         </div>
-
+    
         <div class="col">
-            <h5><strong>About</strong></h5>
-            <a href="#">About Us</a>
-            <a href="#">Delivery Information</a>
+            <h5> <strong>About</h5></strong>
+            <a href="../about/about.html">About Us</a>
+            <a href="../shop/cart.html">Delivery Informations</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms and Conditions</a>
-            <a href="#">Contact Us</a>
+            <a href="https://wa.me/917094810218">Contact Us</a>
+    
         </div>
-
+    
         <div class="col">
-            <h5><strong>My Account</strong></h5>
-            <a href="#">Sign In</a>
-            <a href="#">View Cart</a>
-            <a href="#">My Wishlist</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Help</a>
+            <h5> <strong>My Account</h5></strong>
+            <a href="../sign-up/index.html">Sign In</a>
+            <a href="../shop/cart.html">View cart</a>
+            <a href="../shop/index.html">My Products</a>
+            <a href="tel:+91-709-481-0218">Help</a>
+    
         </div>
     </footer>
 
-    <script>
-    window.onload = () => {
-    const cartContainer = document.getElementById('cart-container');
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    const updateCartDisplay = () => {
-        cartContainer.innerHTML = ''; // Clear the current cart display
-        if (cart.length === 0) {
-            cartContainer.innerHTML = '<p>Your cart is empty!</p>';
-        } else {
-            cart.forEach(product => {
-                cartContainer.innerHTML += `
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="cart-item d-flex" data-product-id="${product.id}">
-                                <img src="${product.image}" alt="${product.name}">
-                                <div>
-                                    <h5>${product.name}</h5>
-                                    <p>Rs ${product.price}</p>
-                                    <div class="cart-item-actions">
-                                        <button class="remove-btn" data-product-id="${product.id}">Remove</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-    };
-
-    const removeProductFromCart = (productId) => {
-        cart = cart.filter(product => product.id !== productId); // Remove the product from the cart
-        localStorage.setItem('cart', JSON.stringify(cart)); // Update local storage
-        updateCartDisplay(); // Refresh the cart display
-    };
-
-    cartContainer.addEventListener('click', (event) => {
-        if (event.target.classList.contains('remove-btn')) {
-            const productId = event.target.getAttribute('data-product-id');
-            removeProductFromCart(productId); // Call function to remove product
-        }
-    });
-
-    updateCartDisplay(); // Initial display of the cart
-};
-
-
-    </script>
+<script src="cart.js"></script>
+    <script src="../home/home.js"></script>
 </body>
 </html>

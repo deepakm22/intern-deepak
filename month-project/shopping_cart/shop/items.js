@@ -1,7 +1,7 @@
 async function fetchProductDetails(productId) {
     try {
         const productURL = `https://shopping-cart-912ad-default-rtdb.firebaseio.com/products/${productId}.json`;
-        console.log('Fetching product details from:', productURL); // Logging the URL
+        console.log('Fetching product details from:', productURL); 
 
         const response = await fetch(productURL);
 
@@ -19,6 +19,7 @@ async function fetchProductDetails(productId) {
         alert('Failed to fetch product');
     }
 }
+
 function displayProduct(product, key) {
     const container = document.getElementById('product1');
 
@@ -27,6 +28,7 @@ function displayProduct(product, key) {
             <div class="image-container">
                 <img src="${product.url}" alt="${product.productName}">
             </div>
+            <i class="fa-solid fa-xmark" id="cancel" onclick="goBackToShop()"></i>
             <div class="des">
                 <span>${product.productName}</span>
                 <h5>${product.productDescription}</h5>
@@ -39,11 +41,47 @@ function displayProduct(product, key) {
                     <i class="fas fa-star"></i>
                 </div>
                 <h4>Rs ${product.price}</h4>
+
+                <div class="quantity-controls">
+                    <button id="decrease-btn" onclick="decreaseQuantity()">-</button>
+                    <input type="number" id="quantity" value="1" min="1" readonly>
+                    <button id="increase-btn" onclick="increaseQuantity()">+</button>
+                </div>
+
                 <button id="add-btn" onclick="addToCart('${key}')">Add to Cart</button>
                 <button id="buy-btn" onclick="buyNow('${key}')" id="delete">Buy Now</button>
             </div>
         </div>
     `;
+}
+
+function increaseQuantity() {
+    const quantityInput = document.getElementById('quantity');
+    quantityInput.value = parseInt(quantityInput.value) + 1;
+}
+
+function decreaseQuantity() {
+    const quantityInput = document.getElementById('quantity');
+    if (parseInt(quantityInput.value) > 1) {
+        quantityInput.value = parseInt(quantityInput.value) - 1;
+    }
+}
+
+function addToCart(key) {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // Check login state
+
+    if (isLoggedIn) {
+        // Show alert that item is added
+        alert('Item added to cart!');
+        
+        // Save the item ID in local storage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(key);
+        localStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+        // Redirect to login page
+        window.location.href = '/month-project/shopping_cart/log-in/index.html'; // Update with your login page URL
+    }
 }
 
 window.onload = () => {
@@ -58,37 +96,24 @@ window.onload = () => {
     }
 };
 
-// Function to check if the user is logged in
-function isLoggedIn() {
-    // Assuming you store a token or user info in localStorage when the user logs in
-    return !!localStorage.getItem('userToken');
+
+function goBackToShop() {
+    window.location.href = '/month-project/shopping_cart/shop/'; 
 }
 
-function addToCart(productId) {
-    if (!isLoggedIn()) {
-        alert('You must be logged in to add products to the cart.');
-        window.location.href = '/month-project/shopping_cart/log-in/'; 
-        return;
-    }
+// let cartCount = 0;
 
-    const productContainer = document.querySelector(`.pro-container[data-product-id="${productId}"]`);
-    
-    if (productContainer) {
-        const productName = productContainer.querySelector('span').innerText;
-        const productPrice = productContainer.querySelector('h4').innerText.replace('Rs ', '');
-        const productImageUrl = productContainer.querySelector('img').src;
+//     // Function to update cart icon count
+//     function updateCartCount() {
+//         const cartIcon = document.querySelector('#lg-bag i');
+//         cartIcon.setAttribute('data-count', cartCount);
+//     }
 
-        const product = {
-            id: productId,
-            name: productName,
-            price: productPrice,
-            image: productImageUrl,
-        };
-
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(product);
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-        alert('Product added to cart!');
-    }
-}
+//     // Add event listeners to all "Add to Cart" buttons
+//     const addToCartButtons = document.querySelectorAll('.add-to-cart');
+//     addToCartButtons.forEach(button => {
+//         button.addEventListener('click', () => {
+//             cartCount++;
+//             updateCartCount();
+//         });
+//     });

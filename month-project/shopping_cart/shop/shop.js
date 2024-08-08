@@ -62,3 +62,4 @@ function displayProducts(products) {
 
 
 window.onload = fetchProducts();
+    

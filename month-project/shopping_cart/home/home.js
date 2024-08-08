@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('userEmail');
         localStorage.removeItem('isAdmin');
         window.location.href = '../home/';
+        window.location.href = '../shop/';
+
     });
 });
 

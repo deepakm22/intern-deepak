@@ -29,16 +29,13 @@
             <li class="dropdown">
                 <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
                 <div class="dropdown-content">
-                    <a href="../log-in/">Login</a>
-                    <a href="../sign-up/">Signup</a>
+                    <a href="../log-in/" id="login-link">Login</a>
+                    <a href="../sign-up/" id="signup-link">Signup</a>
+                    <a href="#" id="logout-link" style="display: none;">Log out</a>
+                    <span id="user-email" style="display: none;"></span>
                 </div>
             </li>
         </ul>
-    </div>
-    <div id="mobile">
-        <!-- <a href="cart.html"><i class="fa-solid fa-bag-shopping" style="color: black;" ></i></a> -->
-        <i id="bar" class="fa-solid fa-outdent" ></i>
-
     </div>
 
 </section>
@@ -63,40 +60,44 @@
 <footer class="section-p1" id="footer">
     <div class="col">
         <img class="logo" src="../assects/images/home/logo2.png" alt="" style="height: 100px; width: 180px;">
-        <h5><strong>Contact</strong></h5>
-        <p><strong>Address:</strong> 564 Karamadai Road, Mettupalayam, Coimbatore</p>
-        <p><strong>Phone:</strong> 7094810218</p>
+        <h5> <strong>Contact</strong></h5>
+        <a href="https://maps.app.goo.gl/yscTMgHowyhDy4Ff8"><p><strong>Address:</strong> 564 Karamadai Road, Mettupalayam , Coimbatore</p></a>
+        <a href="tel:+91-709-481-0218"> <p><strong>Phone:</strong> 7094810218</p></a>
         <div class="follow">
             <div class="icon">
-                <i class="fa-brands fa-facebook"></i>
-                <i class="fa-brands fa-instagram"></i>
-                <i class="fa-brands fa-twitter"></i>
-                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-facebook" id="fb"></i>
+                <i class="fa-brands fa-instagram" id="insta"></i>
+                <i class="fa-brands fa-twitter" id="twiter"></i>
+                <i class="fa-brands fa-youtube" id="ytube"></i>
+
             </div>
+
         </div>
     </div>
 
     <div class="col">
-        <h5><strong>About</strong></h5>
-        <a href="#">About Us</a>
-        <a href="#">Delivery Information</a>
+        <h5> <strong>About</h5></strong>
+        <a href="../about/about.html">About Us</a>
+        <a href="../shop/cart.html">Delivery Informations</a>
         <a href="#">Privacy Policy</a>
         <a href="#">Terms and Conditions</a>
-        <a href="#">Contact Us</a>
+        <a href="https://wa.me/917094810218">Contact Us</a>
+
     </div>
 
     <div class="col">
-        <h5><strong>My Account</strong></h5>
-        <a href="#">Sign In</a>
-        <a href="#">View Cart</a>
-        <a href="#">My Wishlist</a>
-        <a href="#">Track My Order</a>
-        <a href="#">Help</a>
+        <h5> <strong>My Account</h5></strong>
+        <a href="../sign-up/index.html">Sign In</a>
+        <a href="../shop/cart.html">View cart</a>
+        <a href="../shop/index.html">My Products</a>
+        <a href="tel:+91-709-481-0218">Help</a>
+
     </div>
 </footer>
 
 
 <script src="shop.js"></script>
+<script src="../home/home.js"></script>
     
 </body>
 </html>
