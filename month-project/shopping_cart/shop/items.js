@@ -1,7 +1,26 @@
+window.onload = () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    
+    if (!isLoggedIn) {
+        window.location.href = '/month-project/shopping_cart/log-in/index.html';
+        return;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('product');
+
+    if (productId) {
+        fetchProductDetails(productId);
+    } else {
+        console.error('Product ID not found in URL');
+        alert('Product ID not found.');
+    }
+};
+
 async function fetchProductDetails(productId) {
     try {
         const productURL = `https://shopping-cart-912ad-default-rtdb.firebaseio.com/products/${productId}.json`;
-        console.log('Fetching product details from:', productURL); 
+        console.log('Fetching product details from:', productURL);
 
         const response = await fetch(productURL);
 
@@ -11,8 +30,8 @@ async function fetchProductDetails(productId) {
 
         const product = await response.json();
     
-        console.log('Fetched product:', product); // Logging the fetched product
-        displayProduct(product, productId); // Pass the productId as the key
+        console.log('Fetched product:', product);
+        displayProduct(product, productId);
 
     } catch (error) {
         console.error('Error fetching product:', error);
@@ -42,6 +61,16 @@ function displayProduct(product, key) {
                 </div>
                 <h4>Rs ${product.price}</h4>
 
+                <div class="size-options">
+                    <span>Select Size:</span>
+                    <div class="size-buttons">
+                        <button class="size-btn" onclick="selectSize('S')">S</button>
+                        <button class="size-btn" onclick="selectSize('L')">L</button>
+                        <button class="size-btn" onclick="selectSize('XL')">XL</button>
+                        <button class="size-btn" onclick="selectSize('XXL')">XXL</button>
+                    </div>
+                </div>
+
                 <div class="quantity-controls">
                     <button id="decrease-btn" onclick="decreaseQuantity()">-</button>
                     <input type="number" id="quantity" value="1" min="1" readonly>
@@ -49,10 +78,14 @@ function displayProduct(product, key) {
                 </div>
 
                 <button id="add-btn" onclick="addToCart('${key}')">Add to Cart</button>
-                <button id="buy-btn" onclick="buyNow('${key}')" id="delete">Buy Now</button>
+                <button id="buy-btn" onclick="buyNow('${key}')" id="buy-now">Buy Now</button>
             </div>
         </div>
     `;
+}
+
+function selectSize(size) {
+    localStorage.setItem('selectedSize', size);
 }
 
 function increaseQuantity() {
@@ -68,52 +101,31 @@ function decreaseQuantity() {
 }
 
 function addToCart(key) {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // Check login state
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
     if (isLoggedIn) {
-        // Show alert that item is added
         alert('Item added to cart!');
         
-        // Save the item ID in local storage
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         cart.push(key);
         localStorage.setItem('cart', JSON.stringify(cart));
     } else {
-        // Redirect to login page
-        window.location.href = '/month-project/shopping_cart/log-in/index.html'; // Update with your login page URL
+        const currentUrl = window.location.href;
+        localStorage.setItem('redirectAfterLogin', currentUrl);
+
+        window.location.href = '/month-project/shopping_cart/log-in/index.html';
     }
 }
 
-window.onload = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get('product');
+function buyNow(key) {
 
-    if (productId) {
-        fetchProductDetails(productId);
-    } else {
-        console.error('Product ID not found in URL');
-        alert('Product ID not found.');
-    }
-};
+    localStorage.setItem('selectedProductKey', key);
+
+    window.location.href = 'payment.html';
+}
 
 
 function goBackToShop() {
-    window.location.href = '/month-project/shopping_cart/shop/'; 
+    window.location.href = '/month-project/shopping_cart/shop/';
 }
 
-// let cartCount = 0;
-
-//     // Function to update cart icon count
-//     function updateCartCount() {
-//         const cartIcon = document.querySelector('#lg-bag i');
-//         cartIcon.setAttribute('data-count', cartCount);
-//     }
-
-//     // Add event listeners to all "Add to Cart" buttons
-//     const addToCartButtons = document.querySelectorAll('.add-to-cart');
-//     addToCartButtons.forEach(button => {
-//         button.addEventListener('click', () => {
-//             cartCount++;
-//             updateCartCount();
-//         });
-//     });

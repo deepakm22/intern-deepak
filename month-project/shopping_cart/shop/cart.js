@@ -24,7 +24,7 @@ window.onload = () => {
 
     const updateCartDisplay = async () => {
         cartContainer.innerHTML = '';
-        let totalPrice = 0; // Ensure this is a number
+        let totalPrice = 0;
 
         if (cart.length === 0) {
             cartContainer.innerHTML = '<p>Your cart is empty!</p>';
@@ -45,8 +45,7 @@ window.onload = () => {
 
                 const product = await fetchProductDetails(productId);
                 if (product) {
-                    // Convert price to a number to ensure proper calculation
-                    const productPrice = Number(product.price) || 0; // Default to 0 if conversion fails
+                    const productPrice = Number(product.price) || 0; 
                     totalPrice += productPrice;
 
                     cartContainer.innerHTML += `
@@ -57,6 +56,7 @@ window.onload = () => {
                                     <div>
                                         <h5>${product.productName}</h5>
                                         <p>Rs ${productPrice}</p>
+                                        
                                         <div class="cart-item-actions">
                                             <button class="remove-btn" data-product-id="${productId}">Remove</button>
                                         </div>
@@ -90,6 +90,10 @@ window.onload = () => {
 
     placeOrderButton.addEventListener('click', () => {
         alert('Order placed successfully!');
+        // Clear the cart
+        cart = [];
+        localStorage.removeItem('cart');
+        updateCartDisplay();
     });
 
     updateCartDisplay();

@@ -35,10 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('isAdmin', user.isAdmin);
                 localStorage.setItem('isLoggedIn', 'true');
                 
-                if (user.isAdmin) {
-                    window.location.href = "/month-project/shopping_cart/admin_page";
+                const redirectAfterLogin = localStorage.getItem('redirectAfterLogin');
+                if (redirectAfterLogin) {
+                    localStorage.removeItem('redirectAfterLogin');  
+                    window.location.href = redirectAfterLogin;
                 } else {
-                    window.location.href = "../home/";
+                    const RedirectTo = new URLSearchParams(window.location.search).get('redirectTo');
+                    if (user.isAdmin) {
+                        window.location.href = RedirectTo || "/month-project/shopping_cart/admin_page";
+                    } else {
+                        window.location.href = RedirectTo || "../home/";
+                    }
                 }
             } else {
                 alert('This user is not available, please sign up first.');
@@ -49,3 +56,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+

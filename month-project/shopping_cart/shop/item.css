@@ -1,19 +1,19 @@
 .pro-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align items to the start for better layout */
+    align-items: flex-start; 
     margin: 20px auto;  
     padding: 20px;
-    border-radius: 10px; /* Increased border-radius for a softer look */
+    border-radius: 10px; 
     width: 100%;  
     max-width: 1000px;  
-    height: auto; /* Auto height for better flexibility */
-    background: #ffffff; /* White background for the container */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    height: auto; 
+    background: #ffffff; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
 }
 
 .image-container {
-    flex: 3; /* Increased flex ratio for the image */
+    flex: 3; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,12 +23,12 @@
 .image-container img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px; /* Match the container's border-radius */
-    transition: transform 0.3s; /* Add transform effect */
+    border-radius: 10px; 
+    transition: transform 0.3s; 
 }
 
 .image-container img:hover {
-    transform: scale(1.05); /* Scale up on hover */
+    transform: scale(1.05); 
 }
 
 .des {
@@ -73,7 +73,7 @@
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
     font-size: 0.9em;
-    margin-top: 150px; 
+    margin-top: 50px; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
@@ -158,6 +158,7 @@
 .des {
     text-align: center;
     padding: 10px;
+    margin-top: 40px;
 }
 
 .star {
@@ -231,4 +232,42 @@ button:hover {
     color: #cc0000;
 }
 
+.size-options {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    
+}
+
+.size-buttons {
+    margin-top: 5px;
+    display: flex;
+    gap: 10px;
+    margin-left: 60px;
+}
+
+.size-btn {
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    color: black;
+
+}
+
+.size-btn:hover {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.size-btn.selected {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+}
 
