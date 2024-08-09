@@ -56,22 +56,21 @@ function displayProducts(products) {
 }
 
 const searchForm = document.getElementById('search-form');
-let allProducts = {}; // Store all products for filtering
+let allProducts = {}; 
 
 if (searchForm) {
     searchForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault(); 
         
         const searchInput = document.getElementById('search-input');
-        if (searchInput) { // Check if searchInput exists
+        if (searchInput) { 
             const searchValue = searchInput.value.toLowerCase();
-            console.log('Search Input:', searchValue); // Debug log
+            console.log('Search Input:', searchValue); 
             
-            // Call filterProducts and display results
+        
             const filteredProducts = filterProducts(allProducts, searchValue);
             displayProducts(filteredProducts);
             
-            // Log the filtered results for debugging
             console.log('Filtered Products:', filteredProducts);
         } else {
             console.error('Search input not found');
@@ -85,7 +84,6 @@ function filterProducts(products, searchName) {
     for (const key in products) {
         if (products.hasOwnProperty(key)) {
             const product = products[key];
-            // Log each product name for debugging
             console.log('Checking product:', product.productName);
 
             if (product.productName.toLowerCase().includes(searchName)) {
@@ -98,6 +96,6 @@ function filterProducts(products, searchName) {
 }
 
 window.onload = async () => {
-    allProducts = await fetchProducts(); // Store fetched products for filtering
-    console.log('All Products Loaded:', allProducts); // Debug log to check products
+    allProducts = await fetchProducts(); 
+    console.log('All Products Loaded:', allProducts); 
 };
