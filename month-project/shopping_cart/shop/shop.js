@@ -34,7 +34,6 @@ function displayProducts(products) {
                 <img src="${product.url}" alt="${product.productName}">
                 <div class="des">
                     <span>${product.productName}</span>
-                    <h5>${product.productDescription}</h5>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -52,7 +51,7 @@ function displayProducts(products) {
 
             container.appendChild(productCard);
         }
-    }
+    }   
 }
 
 const searchForm = document.getElementById('search-form');
