@@ -9,11 +9,11 @@ async function fetchProducts() {
 
         const products = await response.json();
         displayProducts(products);
-        return products; // Return the fetched products
+        return products; 
     } catch (error) {
         console.error('Error fetching products:', error);
         alert('Failed to fetch products');
-        return {}; // Return an empty object on error
+        return {}; 
     }
 }
 
@@ -53,6 +53,7 @@ function displayProducts(products) {
         }
     }   
 }
+
 
 const searchForm = document.getElementById('search-form');
 let allProducts = {}; 

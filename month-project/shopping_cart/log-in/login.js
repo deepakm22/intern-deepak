@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if (isLoggedIn === 'true') {
+        const isAdmin = localStorage.getItem('isAdmin') === 'true';
+        const RedirectTo = new URLSearchParams(window.location.search).get('redirectTo');
+
+        if (isAdmin) {
+            window.location.href = RedirectTo || "/month-project/shopping_cart/admin_page";
+        } else {
+            window.location.href = RedirectTo || "../home/";
+        }
+        return; 
+    }
+
     const button = document.getElementById('submit');
 
     button.addEventListener('click', async (event) => {
@@ -27,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const users = await response.json();
+            
             const user = Object.values(users).find(user => user.Email === email && user.Password === password);
 
             if (user) {
@@ -34,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('userEmail', email);
                 localStorage.setItem('isAdmin', user.isAdmin);
                 localStorage.setItem('isLoggedIn', 'true');
-                
+
+                localStorage.setItem('userId', user.userId); 
+
                 const redirectAfterLogin = localStorage.getItem('redirectAfterLogin');
                 if (redirectAfterLogin) {
                     localStorage.removeItem('redirectAfterLogin');  
@@ -56,4 +73,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-

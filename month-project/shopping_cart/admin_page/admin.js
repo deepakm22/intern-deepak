@@ -90,34 +90,32 @@ function displayProducts(products) {
     const container = document.getElementById('product1');
     container.innerHTML = '';
 
-    for (const key in products) {
-        if (products.hasOwnProperty(key)) {
-            const product = products[key];
+    const productArray = Object.entries(products); 
 
-            const productCard = document.createElement('div');
-            productCard.className = 'productCard';
+    for (const [key, product] of productArray) {
+        const productCard = document.createElement('div');
+        productCard.className = 'productCard';
 
-            productCard.innerHTML = `
-                <img src="${product.url}" alt="${product.productName}">
-                <div class="des">
-                    <h3>${product.productName}</h3>
-                    <h3>${product.productDescription}</h3>
+        productCard.innerHTML = `
+            <img src="${product.url}" alt="${product.productName}">
+            <div class="des">
+                <h3>${product.productName}</h3>
+                <p>${product.productDescription}</p>
 
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rs ${product.price}</h4>
-                    <button onclick="editProduct('${key}')">Edit</button>
-                    <button onclick="deleteProduct('${key}')" id="delete">Delete</button>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
                 </div>
-            `;
+                <h4>Rs ${product.price}</h4>
+                <button onclick="editProduct('${key}')">Edit</button>
+                <button onclick="deleteProduct('${key}')" id="delete">Delete</button>
+            </div>
+        `;
 
-            container.appendChild(productCard);
-        }
+        container.prepend(productCard); 
     }
 }
 
@@ -133,8 +131,43 @@ window.editProduct = function(productId) {
         document.getElementById('productDescription').value = product.productDescription;
         document.getElementById('price').value = product.price;
         document.getElementById('upload-image').dataset.url = product.url;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        document.getElementById('btn-Submit').style.display = 'none';
+        document.getElementById('btn-update').style.display = 'block';
     })
     .catch(error => console.error('Error fetching product:', error));
+}
+
+// Update product function
+function updateProduct() {
+    const productId = document.getElementById('productId').value;
+    const productURL = `https://shopping-cart-912ad-default-rtdb.firebaseio.com/products/${productId}.json`;
+
+    const updatedProduct = {
+        productName: document.getElementById('productName').value,
+        productDescription: document.getElementById('productDescription').value,
+        price: document.getElementById('price').value,
+        url: document.getElementById('upload-image').dataset.url,
+    };
+
+    fetch(productURL, {
+        method: 'PUT', 
+        body: JSON.stringify(updatedProduct),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Product updated successfully!');
+            resetForm(); 
+        } else {
+            console.error('Error updating product:', response.statusText);
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
 
 document.getElementById('upload-image').addEventListener('change', (event) => {
@@ -150,6 +183,20 @@ document.getElementById('upload-image').addEventListener('change', (event) => {
         reader.readAsDataURL(file);
     }
 });
+
+function resetForm() {
+    document.getElementById('productId').value = '';
+    document.getElementById('productName').value = '';
+    document.getElementById('productDescription').value = '';
+    document.getElementById('price').value = '';
+    document.getElementById('upload-image').dataset.url = '';
+    document.getElementById('btn-Submit').style.display = 'block'; 
+    document.getElementById('btn-update').style.display = 'none'; 
+}
+
+document.getElementById('btn-update').onclick = updateProduct;
+
+
 
 // Delete
 async function deleteProduct(productId) {
