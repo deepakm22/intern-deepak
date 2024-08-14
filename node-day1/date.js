@@ -1,7 +1,6 @@
 const currentDateTime = new Date()
 
-
-console.log(currentDateTime.toString())
+console.log(currentDateTime)
 
 const diwaliDate = new Date('2024-10-31')
 const currentDate = new Date()
