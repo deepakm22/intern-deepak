@@ -21,8 +21,8 @@ const server = http.createServer((req, res) =>{
     });
 
 } else if (parsedUrl.pathname === '/calculate') {
-    const x = parseFloat(parsedUrl.query.x);
-    const y = parseFloat(parsedUrl.query.y);
+    const x = parseFloat(parsedUrl.query.x); 
+    const y = parseFloat(parsedUrl.query.y); 
     const operation = parsedUrl.query.operation;
 
     let result;

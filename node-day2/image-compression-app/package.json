@@ -1,0 +1,21 @@
+{
+  "name": "image-compression-app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+
+  "scripts": {
+"start": "node server.js",
+    "compress": "gulp compress"
+    },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.3.0",
+    "gulp-imagemin": "^9.0.0"
+    }
+}
