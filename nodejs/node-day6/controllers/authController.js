@@ -1,23 +1,41 @@
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
 
-exports.getLoginPage = (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/login.html'));
+const userFilePath = path.join(__dirname, '../user.json');
+
+function readUsersFromFile() {
+const data = fs.readFileSync(userFilePath);
+return JSON.parse(data);
+}
+
+exports.loginPage = (req, res) => {
+const error = req.query.error === 'true' ? 'Invalid username or password' : '';
+res.send(`
+    <html>
+        <link rel="stylesheet" href="../public/style.css">
+
+    <body>
+        <form method="POST" action="/login">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">Login</button>
+        </form>
+        ${error ? `<p style="color:red;">${error}</p>` : ''}
+    </body>
+    </html>
+`);
 };
 
-exports.postLogin = (req, res) => {
+exports.loginUser = (req, res) => {
 const { username, password } = req.body;
-
-const usersFilePath = path.resolve(__dirname, '../user.json');
-
-const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
-
+const users = readUsersFromFile();
 const user = users.find(u => u.username === username && u.password === password);
 
 if (user) {
-    req.session.user = user;
-    res.redirect('/user/user_info');
+    res.redirect(`/user?username=${encodeURIComponent(username)}`);
 } else {
-    res.send('Invalid username or password');
+    res.redirect('/?error=true');
 }
 };

@@ -1,25 +1,38 @@
+const fs = require('fs');
 const path = require('path');
 
-exports.getUserInfoPage = (req, res) => {
-const user = req.session.user;
-if (user) {
-    res.send(`
-    <html>
-        <head>
-        <link rel="stylesheet" type="text/css" href="../info.css">
-        </head>
-        <body>
-        <h1>User Info</h1>
-        <table>
-            <tr><th>Username</th><td>${user.username}</td></tr>
-            <tr><th>Name</th><td>${user.name}</td></tr>
-            <tr><th>Email</th><td>${user.email}</td></tr>
-            <tr><th>Age</th><td>${user.age}</td></tr>
-        </table>
-        </body>
-    </html>
-    `);
-} else {
-    res.redirect('/auth/login');
+const userFilePath = path.join(__dirname, '../user.json');
+
+function readUsersFromFile() {
+const data = fs.readFileSync(userFilePath);
+return JSON.parse(data);
 }
+
+exports.userInfoPage = (req, res) => {
+const { username } = req.query;
+
+if (!username) {
+    return res.redirect('/');
+}
+
+const users = readUsersFromFile();
+const user = users.find(u => u.username === username);
+
+if (!user) {
+    return res.redirect('/');
+}
+
+res.send(`
+    <html>
+    <body>
+        <h1>User Information</h1>
+        <table border="1">
+        <tr><th>Username</th><td>${user.username}</td></tr>
+        <tr><th>Name</th><td>${user.name}</td></tr>
+        <tr><th>Email</th><td>${user.email}</td></tr>
+        </table>
+        <a href="/">Logout</a>
+    </body>
+    </html>
+`);
 };
