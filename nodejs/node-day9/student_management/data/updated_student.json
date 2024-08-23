@@ -1,0 +1,9 @@
+{
+  "id": 1,
+  "name": "Kamal",
+  "email": "kamal@example.com",
+  "phone_no": "5555555555",
+  "address": "789 Chennai",
+  "department": "Engineering",
+  "institution": "SRM Institute"
+}

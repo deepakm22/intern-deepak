@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "name": "Arun Kumar",
+    "email": "arunkumar@example.com",
+    "phone_no": "9876543210",
+    "address": "12 South Street",
+    "department": "CSE",
+    "institution": "Anna University"
+  },
+  {
+    "id": 2,
+    "name": "Deepak",
+    "email": "deepak@example.com",
+    "phone_no": "8765432109",
+    "address": "34 North Street",
+    "department": "ECE",
+    "institution": "PSG College of Technology"
+  },
+  {
+    "id": 3,
+    "name": "Ravi Chandran",
+    "email": "ravichandran@example.com",
+    "phone_no": "7654321098",
+    "address": "56 East Street",
+    "department": "IT",
+    "institution": "Madras Institute of Technology"
+  },
+  {
+    "id": 4,
+    "name": "Meena ",
+    "email": "meena@example.com",
+    "phone_no": "6543210987",
+    "address": "78 West Street",
+    "department": "EEE",
+    "institution": "Coimbatore Institute of Technology"
+  },
+  {
+    "id": 5,
+    "name": "Vijay Kumar",
+    "email": "vijaykumar@example.com",
+    "phone_no": "5432109876",
+    "address": "90 Central Avenue",
+    "department": "Mechanical",
+    "institution": "SRM University"
+  },
+  {
+    "id": 6,
+    "name": "Batcha",
+    "email": "batcha@example.com",
+    "phone_no": "4321098765",
+    "address": "23 Park Road",
+    "department": "Civil",
+    "institution": "Thiagarajar College of Engineering"
+  },
+  {
+    "id": 7,
+    "name": "Suresh Reddy",
+    "email": "sureshreddy@example.com",
+    "phone_no": "3210987654",
+    "address": "45 Temple Street",
+    "department": "Biotech",
+    "institution": "Kumaraguru College of Technology"
+  },
+  {
+    "id": 8,
+    "name": "vijay",
+    "email": "vijay@example.com",
+    "phone_no": "3210987654",
+    "address": "45 Temple Street",
+    "department": "Biotech",
+    "institution": "Kumaraguru College of Technology"
+  },
+  {
+    "id": 9,
+    "name": "Suresh",
+    "email": "suresh@example.com",
+    "phone_no": "3210987654",
+    "address": "45 Temple Street",
+    "department": "Biotech",
+    "institution": "Kumaraguru College of Technology"
+  }
+]
