@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+</head>
+<body>
+    <h1>User Page</h1>
+    <div id="user-info"></div>
+    <form action="/user/update" method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="fullname" placeholder="Full Name" required>
+        <button type="submit">Update</button>
+    </form>
+    <a href="/auth/logout">Logout</a>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get('username');
+        const password = urlParams.get('password');
+
+        fetch(`/user?username=${username}&password=${password}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('user-info').innerText = `Username: ${data.username}, Email: ${data.email}, Full Name: ${data.fullname}`;
+            });
+    </script>
+</body>
+</html>
