@@ -1,6 +1,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const { response } = require('express');
+
+require('dotenv').config()
 
 exports.register = async (req, res) => {
     console.log('Register endpoint hit'); 
@@ -64,13 +67,32 @@ exports.login = async (req, res) => {
         if (!validPassword) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
+        const status = "login successful"
+        const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_KEY);
 
-        const token = jwt.sign({ id: user.id, email: user.email }, 'yourSecretKey', { expiresIn: '1h' });
-
-        res.status(200).json({ token });
+        const username = user.name
+        res.status(200).json({ status, token, username });
     
     } catch (error) {
         console.error(error); 
         res.status(500).json({ error: 'An unexpected error occurred. Please try again later.' });
+    }
+};
+
+module.exports.getUserById = async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+    const user = await User.findByPk(userId, {
+        attributes: { exclude: ['password'] }
+    });
+
+    if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+    res.status(200).json(user);
+    } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal server error' });
     }
 };

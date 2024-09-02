@@ -4,9 +4,9 @@ const authenticateToken = require('../middlewares/auth');
 
 const router = express.Router();
 
-router.post('/', authenticateToken, createTask);
-router.get('/', authenticateToken, getTasks);
-router.put('/:id', authenticateToken, updateTask);
-router.delete('/:id', authenticateToken, deleteTask);
+router.post('/create', authenticateToken, createTask);
+router.get('/get', authenticateToken, getTasks);
+router.put('/update/:id', authenticateToken, updateTask);
+router.delete('/delete/:id', authenticateToken, deleteTask);
 
 module.exports = router;
