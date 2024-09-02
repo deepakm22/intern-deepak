@@ -89,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function editTask(taskId) {
-        // Fetch task data and open the edit modal
         const token = localStorage.getItem('userToken');
         fetch(`http://localhost:3000/api/tasks/get/${taskId}`, {
             method: 'GET',
@@ -161,7 +160,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.deleteTask = function(taskId) {
-        if (confirm('Are you sure you want to delete this task?')) {
+        const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+        confirmModal.show();
+        
+        document.getElementById('confirmDeleteButton').onclick = function() {
             fetch(`http://localhost:3000/api/tasks/delete/${taskId}`, {
                 method: 'DELETE',
                 headers: {
@@ -174,14 +176,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log('Task deleted');
                     getTasks();
                 } else {
-                    alert('Error: Unable to delete task');
+                    document.getElementById('errorMessage').textContent = 'Unable to delete task. Please try again later.';
+                    const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                    errorModal.show();
                 }
+            })
+            .catch(() => {
+                document.getElementById('errorMessage').textContent = 'A network error occurred. Please check your connection.';
+                const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                errorModal.show();
             });
-        }
+            
+            confirmModal.hide();
+        };
     };
-
+    
     document.getElementById('logout-button').addEventListener('click', () => {
         localStorage.removeItem('userToken');
         window.location.href = 'login.html';
     });
 });
+
+
