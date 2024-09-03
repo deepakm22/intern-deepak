@@ -1,10 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const username = localStorage.getItem('username');
-    if (username) {
-        document.getElementById('profile').textContent = username;
-    } else {
-        document.getElementById('profile').textContent = "User";
-    }
+    document.getElementById('profile').textContent = username || "User";
 
     if (!localStorage.getItem('userToken')) {
         window.location.href = 'login.html';
@@ -47,6 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('addTaskForm').reset();
                 const addTaskModal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
                 addTaskModal.hide();
+                let successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+                setTimeout(function() {
+                    successModal.hide();
+                }, 3000);
             } else {
                 const errorText = await response.text();
                 console.error('Error response:', errorText);
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p class="task-priority">Priority: ${task.priority}</p>
                         <p class="task-status">Status: ${task.status}</p>
                         <p class="task-pinned">Pinned: ${task.isPinned ? 'Yes' : 'No'}</p>
-                        <button class="btn btn-warning" onclick="editTask(${task.id})">Edit</button>
+                        <button class="btn btn-warning" onclick="editTask(${task.id}, '${task.title}', '${task.description}', '${new Date(task.dueDate).toISOString().split('T')[0]}', '${task.priority}', '${task.status}', ${task.isPinned})">Edit</button>
                         <button class="btn btn-danger" onclick="deleteTask(${task.id})">Delete</button>
                     </div>
                 </div>
@@ -88,76 +89,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function editTask(taskId) {
-        const token = localStorage.getItem('userToken');
-        fetch(`http://localhost:3000/api/tasks/get/${taskId}`, {
-            method: 'GET',
-            headers: {
-                'authorization': token,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(task => {
-            document.getElementById('taskId').value = task.id;
-            document.getElementById('taskTitle').value = task.title;
-            document.getElementById('taskDescription').value = task.description;
-            document.getElementById('taskDueDate').value = task.dueDate.split('T')[0];
-            document.getElementById('taskPriority').value = task.priority;
-            document.getElementById('taskStatus').value = task.status;
-            document.getElementById('taskIsPinned').checked = task.isPinned;
+    window.editTask = function(taskId, title, description, dueDate, priority, status, isPinned) {
+        document.getElementById('taskId').value = taskId;
+        document.getElementById('editTaskTitle').value = title;
+        document.getElementById('editTaskDescription').value = description;
+        document.getElementById('editTaskDueDate').value = dueDate;
+        document.getElementById('editTaskPriority').value = priority;
+        document.getElementById('editTaskStatus').value = status;
+        document.getElementById('editTaskIsPinned').checked = isPinned;
+    
+        const editTaskModal = new bootstrap.Modal(document.getElementById('editTaskModal'));
+        editTaskModal.show();
+    };
 
-            const editTaskModal = new bootstrap.Modal(document.getElementById('editTaskModal'));
-            editTaskModal.show();
-        });
-    }
+    document.getElementById('Save').addEventListener('click', () => {
+        const taskId = document.getElementById('taskId').value;
+        const title = document.getElementById('editTaskTitle').value;
+        const description = document.getElementById('editTaskDescription').value;
+        const priority = document.getElementById('editTaskPriority').value;
+        const status = document.getElementById('editTaskStatus').value;
+        const dueDate = new Date(document.getElementById('editTaskDueDate').value).toISOString();
+        const isPinned = document.getElementById('editTaskIsPinned').checked;
 
-    document.getElementById('editTaskForm').addEventListener('submit', async function(event) {
-        event.preventDefault();
-
-        const taskData = {
-            title: document.getElementById('taskTitle').value,
-            description: document.getElementById('taskDescription').value,
-            dueDate: document.getElementById('taskDueDate').value,
-            priority: document.getElementById('taskPriority').value,
-            status: document.getElementById('taskStatus').value,
-            isPinned: document.getElementById('taskIsPinned').checked
+        const task = {
+            title,
+            description,
+            priority,
+            status,
+            dueDate,
+            isPinned
         };
 
-        if (isNaN(Date.parse(taskData.dueDate))) {
-            alert('Invalid date format');
-            return;
-        }
-
-        const taskId = document.getElementById('taskId').value;
-
-        try {
-            const token = localStorage.getItem('userToken');
-            const response = await fetch(`http://localhost:3000/api/tasks/update/${taskId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': token
-                },
-                body: JSON.stringify(taskData)
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Task updated:', data);
-                getTasks();
-                document.getElementById('editTaskForm').reset();
-                const editTaskModal = bootstrap.Modal.getInstance(document.getElementById('editTaskModal'));
-                editTaskModal.hide();
-            } else {
-                const errorText = await response.text();
-                console.error('Error response:', errorText);
-                alert('Error: Unable to update task');
-            }
-        } catch (error) {
-            alert(`Error: ${error.message}`);
-        }
+        loadTask(taskId, task);
     });
+
+    function loadTask(taskId, updatedTask) {
+        const token = localStorage.getItem('userToken');
+        
+        fetch(`http://localhost:3000/api/tasks/update/${taskId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedTask),
+        })
+        .then(response => response.json())
+        .then(() => {
+            const editTaskModal = bootstrap.Modal.getInstance(document.getElementById('editTaskModal'));
+            editTaskModal.hide();
+            getTasks();
+
+            let successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+            setTimeout(() => {
+                successModal.hide();
+            }, 3000);
+        })
+        .catch(error => console.error('Error editing task:', error));
+    }    
 
     window.deleteTask = function(taskId) {
         const confirmModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
@@ -190,11 +180,19 @@ document.addEventListener('DOMContentLoaded', () => {
             confirmModal.hide();
         };
     };
+
     
     document.getElementById('logout-button').addEventListener('click', () => {
         localStorage.removeItem('userToken');
         window.location.href = 'login.html';
     });
+
+
+    
 });
+
+
+
+
 
 

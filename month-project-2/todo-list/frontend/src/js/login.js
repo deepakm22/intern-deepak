@@ -1,4 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
+
+    if(localStorage.getItem('userToken')){
+        window.location.href = 'index.html'
+    }else{
+
     const loginForm = document.getElementById('loginForm');
     const modalMessage = document.getElementById('modalMessage');
     const messageModal = new bootstrap.Modal(document.getElementById('messageModal'));
@@ -43,4 +48,5 @@ document.addEventListener('DOMContentLoaded', function () {
             messageModal.show();
         }
     });
+}
 });
