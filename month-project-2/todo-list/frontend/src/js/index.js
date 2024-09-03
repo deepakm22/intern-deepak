@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
             task_list.innerHTML = tasks.map(task => `
                 <div class="task-item">
                     <div class="task-body">
-                        <h3 class="task-title">Title: ${task.title}</h3>
+                        <h3 class="task-title">Title: <span>${task.title}</span></h3>
                         <p class="task-description">Description: ${task.description}</p>
                         <p class="task-dueDate">Due Date: ${new Date(task.dueDate).toLocaleDateString()}</p>
                         <p class="task-priority">Priority: ${task.priority}</p>

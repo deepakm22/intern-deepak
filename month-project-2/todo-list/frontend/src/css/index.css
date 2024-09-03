@@ -48,7 +48,9 @@
     top: 5px;
     right: 10px;
 }
-
+span{
+    color: rgb(189, 7, 22);
+}
 
         /* .sidebar a {
             padding: 10px 20px;
