@@ -76,14 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         <h3 class="task-title">Title: <span>${task.title}</span></h3>
                         <p class="task-description">Description: ${task.description}</p>
                         <p class="task-dueDate">Due Date: ${new Date(task.dueDate).toLocaleDateString()}</p>
-                        <p class="task-priority">Priority: ${task.priority}</p>
-                        <p class="task-status">Status: ${task.status}</p>
-                        <p class="task-pinned">Pinned: ${task.isPinned ? 'Yes' : 'No'}</p>
-                        <button class="btn btn-warning" onclick="editTask(${task.id}, '${task.title}', '${task.description}', '${new Date(task.dueDate).toISOString().split('T')[0]}', '${task.priority}', '${task.status}', ${task.isPinned})">Edit</button>
-                        <button class="btn btn-danger" onclick="deleteTask(${task.id})">Delete</button>
+                        <p class="task-priority" data-priority="${task.priority}">Priority: ${task.priority}</p>
+                        <p class="task-status" data-status="${task.status}">Status: ${task.status}</p>
+                        <p class="task-pinned">Pinned: ${task.isPinned ? 'Yes' : 'No'}</p><br>
+                        <button class="btn btn-warning"  id="edit" onclick="editTask(${task.id}, '${task.title}', '${task.description}', '${new Date(task.dueDate).toISOString().split('T')[0]}', '${task.priority}', '${task.status}', ${task.isPinned})">Edit</button>
+                        <button class="btn btn-danger" id="delete" onclick="deleteTask(${task.id})">Delete</button>
                     </div>
                 </div>
             `).join('');
+            
         } catch (error) {
             console.error('Error fetching tasks:', error);
         }
@@ -185,14 +186,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('logout-button').addEventListener('click', () => {
         localStorage.removeItem('userToken');
         window.location.href = 'login.html';
-    });
-
-
-    
+    });  
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr("#calendar", {
+        inline: true,
+    });
 
-
-
+    document.getElementById('todayButton').addEventListener('click', function() {
+        const calendarModal = new bootstrap.Modal(document.getElementById('calendarModal'));
+        calendarModal.show();
+    });
+});
 
 
