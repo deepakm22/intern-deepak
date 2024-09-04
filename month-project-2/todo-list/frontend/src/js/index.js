@@ -201,3 +201,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+const searchTasks = async () => {
+    const searchInput = document.getElementById('searchInput').value;
+    try {
+        const response = await fetch(`/tasks/search?title=${searchInput}`, { headers });
+        if (!response.ok) throw new Error('Failed to search tasks');
+        const { exactMatch, relatedTasks } = await response.json();
+        renderTasks([exactMatch, ...relatedTasks]);
+    } catch (error) {
+        console.error('Error searching tasks:', error);
+    }
+};
+
+document.getElementById('addTaskForm').addEventListener('submit', addTask);
+document.getElementById('search-button').addEventListener('click', searchTasks);
+
+fetchTasks(); 

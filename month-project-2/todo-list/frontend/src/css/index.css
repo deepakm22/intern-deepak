@@ -70,6 +70,27 @@ span{
     border-radius: 30px;
     padding: 10px 20px;
 }
+
+
+.priority-dropdown {
+    margin-top: 20px;
+}
+
+.priority-dropdown label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.priority-dropdown .form-select {
+    border-radius: 0.25rem;
+    padding: 0.300rem 0.75rem;
+    font-size: 1rem;
+}
+
+.form-select{
+    width: 150px;
+}
         .sidebar a i {
             margin-right: 10px;
             color: #007bff;

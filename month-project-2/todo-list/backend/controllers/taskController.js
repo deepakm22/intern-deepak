@@ -1,5 +1,5 @@
-
 const Task = require('../models/Task');
+const { Op } = require('sequelize');
 
 exports.createTask = async (req, res) => {
     try {
@@ -91,4 +91,46 @@ exports.deleteTask = async (req, res) => {
     }
 
 
+};
+
+
+exports.searchTasks = async (req, res) => {
+    const { title } = req.query; 
+console.log(title);
+
+    if (!title) {
+        return res.status(400).json({ error: 'Title is required to search' });
+    }
+
+    try {
+        const exactMatchTask = await Task.findOne({
+            where: {
+                title: {
+                    [Op.iLike]: title  
+                }
+            }
+        });
+
+        const relatedTasks = await Task.findAll({
+            where: {
+                title: {
+                    [Op.iLike]: `%${title}%`  
+                }
+            },
+            order: [['createdAt', 'DESC']] 
+        });
+
+        if (exactMatchTask) {
+            return res.json({
+                exactMatch: exactMatchTask,
+                relatedTasks: relatedTasks.filter(task => task.id !== exactMatchTask.id)
+            });
+        }
+
+        return res.json({ relatedTasks });
+
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Server error' });
+    }
 };

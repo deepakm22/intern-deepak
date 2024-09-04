@@ -25,15 +25,25 @@
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add task</button>
         <!-- <a href="#"><i class="fas fa-search"></i> Search</a> -->
         <a href="#" id="todayButton"><i class="fas fa-calendar-day"></i> Today</a>
+        <div class="priority-dropdown">
+            <label for="priorityFilter">Filter by Priority:</label>
+            <select id="priorityFilter" class="form-select" >
+                <option value="">All</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
         <a href="#" class="logout-button" id="logout-button"><i class="fas fa-sign-out-alt"></i> Logout</a> 
+
     </div>
 
     <div class="content">
         <div class="header">
             <img src="./images/download__1_-removebg-preview.png" alt="ToDo Image" id="main" class="center-image">
             <div class="search-bar">
-                <input type="text" class="form-control" placeholder="Search tasks">
-                <button class="btn btn-secondary search-button"><i class="fas fa-search"></i></button>
+                <input type="text" class="form-control" placeholder="Search tasks" id="searchInput">
+                <button class="btn btn-secondary search-button" id="search-button"><i class="fas fa-search"></i></button>
             </div>
         </div>      
         <div class="task-list" id="task-list">
