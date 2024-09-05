@@ -69,17 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             const tasks = await response.json();
+            
+            tasks.sort((a, b) => b.isPinned - a.isPinned);
+    
             const task_list = document.getElementById('task-list');
             task_list.innerHTML = tasks.map(task => `
                 <div class="task-item">
                     <div class="task-body">
+                        ${task.isPinned ? '<i class="bi bi-pin-fill pinned-icon"></i>' : ''}
                         <h3 class="task-title">Title: <span>${task.title}</span></h3>
                         <p class="task-description">Description: ${task.description}</p>
                         <p class="task-dueDate">Due Date: ${new Date(task.dueDate).toLocaleDateString()}</p>
                         <p class="task-priority" data-priority="${task.priority}">Priority: ${task.priority}</p>
                         <p class="task-status" data-status="${task.status}">Status: ${task.status}</p>
                         <p class="task-pinned">Pinned: ${task.isPinned ? 'Yes' : 'No'}</p><br>
-                        <button class="btn btn-warning"  id="edit" onclick="editTask(${task.id}, '${task.title}', '${task.description}', '${new Date(task.dueDate).toISOString().split('T')[0]}', '${task.priority}', '${task.status}', ${task.isPinned})">Edit</button>
+                        <button class="btn btn-warning" id="edit" onclick="editTask(${task.id}, '${task.title}', '${task.description}', '${new Date(task.dueDate).toISOString().split('T')[0]}', '${task.priority}', '${task.status}', ${task.isPinned})">Edit</button>
                         <button class="btn btn-danger" id="delete" onclick="deleteTask(${task.id})">Delete</button>
                     </div>
                 </div>
@@ -89,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching tasks:', error);
         }
     }
-
+    
     window.editTask = function(taskId, title, description, dueDate, priority, status, isPinned) {
         document.getElementById('taskId').value = taskId;
         document.getElementById('editTaskTitle').value = title;

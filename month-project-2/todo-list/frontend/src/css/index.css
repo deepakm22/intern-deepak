@@ -278,6 +278,14 @@ span{
             margin-left: 900px;
         }
 
+        .pinned-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: gold; 
+        }
+
         .sidebar {
             height: 100vh;
             width: 250px;
@@ -399,14 +407,99 @@ span{
 
 
 
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 200px;
+    }
+
+    .profile-icon img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+    }
+
+    .task-list {
+        padding: 15px;
+    }
+}
 
 
 
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        padding-top: 10px;
+    }
 
+    .content {
+        margin-left: 0;
+        padding: 10px;
+    }
 
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 
+    .search-bar {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
 
+    .search-bar .form-control {
+        margin-right: 0;
+    }
 
+    .btn-primary {
+        padding: 6px 12px;
+    }
 
+    .sidebar .logo img {
+        width: 70px;
+    }
 
+    .profile-icon img {
+        width: 20px;
+        height: 20px;
+    }
 
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 5px 0;
+    }
+
+    .task-item .task-options a {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebar {
+        font-size: 14px;
+    }
+
+    .search-bar .form-control {
+        padding: 8px 12px;
+    }
+
+    .btn-primary {
+        padding: 4px 8px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
