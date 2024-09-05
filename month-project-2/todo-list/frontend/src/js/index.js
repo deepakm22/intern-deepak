@@ -201,19 +201,80 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-const searchTasks = async () => {
-    const searchInput = document.getElementById('searchInput').value;
-    try {
-        const response = await fetch(`/tasks/search?title=${searchInput}`, { headers });
-        if (!response.ok) throw new Error('Failed to search tasks');
-        const { exactMatch, relatedTasks } = await response.json();
-        renderTasks([exactMatch, ...relatedTasks]);
-    } catch (error) {
-        console.error('Error searching tasks:', error);
+document.getElementById('search-button').addEventListener('click', async function() {
+    const title = document.getElementById('searchInput').value;
+
+    if (!title) {
+        showModal('error', 'Please enter a task title to search!');
+        return;
     }
-};
 
-document.getElementById('addTaskForm').addEventListener('submit', addTask);
-document.getElementById('search-button').addEventListener('click', searchTasks);
+    try {
+        const response = await fetch(`http://localhost:3000/api/tasks/search?title=${encodeURIComponent(title)}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': ` ${localStorage.getItem('userToken')}`, 
+                'Content-Type': 'application/json',
+            }
+        });
 
-fetchTasks(); 
+        if (response.ok) {
+            const searchResults = await response.json();
+            displaySearchResults(searchResults);
+        } else {
+            showModal('error', 'Failed to search tasks.');
+        }
+    } catch (error) {
+        console.error("Error occurred during search:", error);
+        showModal('error', 'An error occurred while searching for tasks.');
+    }
+});
+
+function showModal(type, message) {
+    const modalId = type === 'error' ? 'errorModal' : 'successModal';
+    const modalMessageId = type === 'error' ? 'errorMessage' : 'successMessage';
+    
+    document.getElementById(modalMessageId).innerText = message;
+    new bootstrap.Modal(document.getElementById(modalId)).show();
+}
+
+function displaySearchResults(searchResults) {
+    const taskListElement = document.getElementById('task-list');
+    taskListElement.innerHTML = ''; 
+
+    if (searchResults.exactMatch) {
+        const exactMatchTask = searchResults.exactMatch;
+        taskListElement.innerHTML += `<h4>Exact Match <button onclick="location.reload()" id="back">Back</button></h4>  
+`;
+        taskListElement.innerHTML += createTaskItem(exactMatchTask);
+    }
+
+    if (searchResults.relatedTasks && searchResults.relatedTasks.length > 0) {
+        taskListElement.innerHTML += `<h4>Related Tasks  <button onclick="location.reload()" id="back">Back</button></h4> 
+`;
+        searchResults.relatedTasks.forEach(task => {
+            taskListElement.innerHTML += createTaskItem(task);
+        });
+    } else {
+        taskListElement.innerHTML += `<p>No related tasks found.</p>`;
+    }
+}
+
+function createTaskItem(task) {
+    return `
+            <div class="task-item">
+                <div class="task-body">
+                    <h3 class="task-title">Title: <span>${task.title}</span></h3>
+                    <p class="task-description">Description: ${task.description}</p>
+                    <p class="task-dueDate">Due Date: ${new Date(task.dueDate).toLocaleDateString()}</p>
+                    <p class="task-priority" data-priority="${task.priority}">Priority: ${task.priority}</p>
+                    <p class="task-status" data-status="${task.status}">Status: ${task.status}</p>
+                    <p class="task-pinned">Pinned: ${task.isPinned ? 'Yes' : 'No'}</p><br>
+                    <button class="btn btn-warning" id="edit" onclick="editTask(${task.id}, '${task.title}', '${task.description}', '${new Date(task.dueDate).toISOString().split('T')[0]}', '${task.priority}', '${task.status}', ${task.isPinned})">Edit</button>
+                    <button class="btn btn-danger" id="delete" onclick="deleteTask(${task.id})">Delete</button>
+                </div>
+            </div>
+    `;
+}
+
+
