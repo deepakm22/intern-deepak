@@ -1,13 +1,7 @@
         body {
             background-color: #f5f6f7;
         }
-        /* .sidebar {
-            height: 100vh;
-            position: fixed;
-            background-color: #ffffff;
-            border-right: 1px solid #ddd;
-            padding-top: 20px;
-        } */
+
         .sidebar .logo {
             text-align: center;
             margin-bottom: 2px;
@@ -73,7 +67,9 @@ span{
 
 
 .priority-dropdown {
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-left: 14px;
+    
 }
 
 .priority-dropdown label {
@@ -86,10 +82,16 @@ span{
     border-radius: 0.25rem;
     padding: 0.300rem 0.75rem;
     font-size: 1rem;
+    margin-left: 14px;
+
 }
 
 .form-select{
-    width: 150px;
+    width: 120px;
+}
+
+#Filter{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
         .sidebar a i {
             margin-right: 10px;
@@ -278,14 +280,23 @@ span{
             margin-left: 900px;
         }
 
-        .pinned-icon {
+        .task-item {
+            position: relative; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .pin-container {
             position: absolute;
             top: 10px;
             right: 10px;
-            font-size: 20px;
-            color: gold; 
         }
-
+        
+        .pin-icon {
+            font-size: 1em; 
+            color: #fc0606; 
+        }
         .sidebar {
             height: 100vh;
             width: 250px;

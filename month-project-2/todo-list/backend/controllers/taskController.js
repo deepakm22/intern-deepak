@@ -37,7 +37,18 @@ exports.createTask = async (req, res) => {
 
 exports.getTasks = async (req, res) => {
     try {
-        const tasks = await Task.findAll({ where: { userId: req.user.id } });
+        const userId = req.user.id;
+        const { priority } = req.query;
+        
+        const validPriorities = ['low', 'medium', 'high'];
+        const whereCondition = { userId };
+        
+        if (priority && validPriorities.includes(priority.toLowerCase())) {
+            whereCondition.priority = priority.toLowerCase(); 
+        }
+
+        const tasks = await Task.findAll({ where: whereCondition });
+
         return res.status(200).json(tasks);
     } catch (error) {
         console.error('Error fetching tasks:', error);

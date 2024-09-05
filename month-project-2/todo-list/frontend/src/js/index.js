@@ -58,10 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    async function getTasks() {
+        const priorityFilter = document.getElementById('priorityFilter');
+        console.log(priorityFilter);
+        
+        priorityFilter.addEventListener('change', () => {
+            const selectedPriority = priorityFilter.value;
+            console.log(selectedPriority);
+            
+            getTasks(selectedPriority); 
+        });
+
+    async function getTasks(priority = '') {
         const token = localStorage.getItem('userToken');
+        let url = 'http://localhost:3000/api/tasks/get';
+    if (priority) {
+        url += `?priority=${encodeURIComponent(priority)}`;
+    }
+
         try {
-            const response = await fetch('http://localhost:3000/api/tasks/get', {
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     'authorization': token,
@@ -74,15 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
             const task_list = document.getElementById('task-list');
             task_list.innerHTML = tasks.map(task => `
-                <div class="task-item">
+                <div class="task-item ">
                     <div class="task-body">
-                        ${task.isPinned ? '<i class="bi bi-pin-fill pinned-icon"></i>' : ''}
-                        <h3 class="task-title">Title: <span>${task.title}</span></h3>
+                        <div class="pin-container"> ${task.isPinned ? '<i class="pin-icon">📌</i>' : ''}</div>                        <h3 class="task-title">Title: <span>${task.title}</span></h3>
                         <p class="task-description">Description: ${task.description}</p>
                         <p class="task-dueDate">Due Date: ${new Date(task.dueDate).toLocaleDateString()}</p>
                         <p class="task-priority" data-priority="${task.priority}">Priority: ${task.priority}</p>
                         <p class="task-status" data-status="${task.status}">Status: ${task.status}</p>
-                        <p class="task-pinned">Pinned: ${task.isPinned ? 'Yes' : 'No'}</p><br>
+                        <p class="task-pinned" style="display: none;">Pinned: ${task.isPinned ? 'Yes' : 'No'}</p><br>
                         <button class="btn btn-warning" id="edit" onclick="editTask(${task.id}, '${task.title}', '${task.description}', '${new Date(task.dueDate).toISOString().split('T')[0]}', '${task.priority}', '${task.status}', ${task.isPinned})">Edit</button>
                         <button class="btn btn-danger" id="delete" onclick="deleteTask(${task.id})">Delete</button>
                     </div>
