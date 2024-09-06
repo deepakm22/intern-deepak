@@ -60,6 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const priorityFilter = document.getElementById('priorityFilter');
         console.log(priorityFilter);
+        const dueDateInput = document.getElementById('taskDueDate');
+        const today = new Date().toISOString().split('T')[0];
+        dueDateInput.setAttribute('min', today);
         
         priorityFilter.addEventListener('change', () => {
             const selectedPriority = priorityFilter.value;
@@ -67,6 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             getTasks(selectedPriority); 
         });
+
+
 
     async function getTasks(priority = '') {
         const token = localStorage.getItem('userToken');
@@ -99,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p class="task-pinned" style="display: none;">Pinned: ${task.isPinned ? 'Yes' : 'No'}</p><br>
                         <button class="btn btn-warning" id="edit" onclick="editTask(${task.id}, '${task.title}', '${task.description}', '${new Date(task.dueDate).toISOString().split('T')[0]}', '${task.priority}', '${task.status}', ${task.isPinned})">Edit</button>
                         <button class="btn btn-danger" id="delete" onclick="deleteTask(${task.id})">Delete</button>
+                        <button class="btn btn-primary btn-sm add-collaborator-btn"><i class="bi bi-person-plus"></i> Add Collaborator</button>
                     </div>
                 </div>
             `).join('');
@@ -107,7 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error fetching tasks:', error);
         }
     }
-    
+
+
     window.editTask = function(taskId, title, description, dueDate, priority, status, isPinned) {
         document.getElementById('taskId').value = taskId;
         document.getElementById('editTaskTitle').value = title;

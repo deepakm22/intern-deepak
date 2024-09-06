@@ -104,14 +104,13 @@ exports.deleteTask = async (req, res) => {
 
 };
 
-
 exports.searchTasks = async (req, res) => {
     const { title } = req.query; 
-console.log(title);
+    console.log(title);
 
-    if (!title) {
+        if (!title) {
         return res.status(400).json({ error: 'Title is required to search' });
-    }
+        }
 
     try {
         const exactMatchTask = await Task.findOne({

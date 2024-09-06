@@ -23,6 +23,8 @@
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTaskModal">+ Add task</button>
         <!-- <a href="#"><i class="fas fa-search"></i> Search</a> -->
         <a href="#" id="todayButton"><i class="fas fa-calendar-day"></i> Today</a>
+        <!-- <a href="#" id="todayTasksText"><i class="fas fa-calendar-check"></i> Today's Tasks</a>  -->
+
         <div class="priority-dropdown">
             <label for="priorityFilter" id="Filter"><i class="fa-solid fa-filter" style="color: #007bff;"></i>   Filter by Priority</label>
             <select id="priorityFilter" class="form-select" >
@@ -71,7 +73,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="taskDueDate" class="form-label">Due Date</label>
-                            <input type="date" class="form-control" id="taskDueDate">
+                            <input type="date" class="form-control" id="taskDueDate" min="" required>
                         </div>
                         <div class="mb-3">
                             <label for="taskPriority" class="form-label">Priority</label>
@@ -100,7 +102,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
