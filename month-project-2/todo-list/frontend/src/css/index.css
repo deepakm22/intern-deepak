@@ -267,6 +267,11 @@ span{
             border: none;
         }
 
+        #collaborator{
+            width: 100px;
+            border: none;
+        }
+
         .content #add{
             width: 150px;
             font-size: 20px;

@@ -3,6 +3,7 @@
     const sequelize = require('./config/database');
     const authRoutes = require('./routes/authRoutes');
     const taskRoutes = require('./routes/taskRoutes');
+    const collaboratorRoutes = require('./routes/collaboratorRoutes');
     const cors = require('cors')
 
 
@@ -15,13 +16,14 @@
 
     app.use('/api/auth', authRoutes);
     app.use('/api/tasks', taskRoutes);
+    app.use('/api/collaborators', collaboratorRoutes);
 
 
 
     sequelize.authenticate()
         .then(() => {
             console.log('Database connected successfully');
-            return sequelize.sync(); 
+            return sequelize.sync({alter:true}); 
         })
         .then(() => {
             app.listen(3000, () => {
