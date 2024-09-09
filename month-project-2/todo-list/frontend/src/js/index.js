@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'authorization': token
+                    'authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(taskData)
             });
@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
         const priorityFilter = document.getElementById('priorityFilter');
-        // console.log(priorityFilter);
         const dueDateInput = document.getElementById('taskDueDate');
         const today = new Date().toISOString().split('T')[0];
         dueDateInput.setAttribute('min', today);
