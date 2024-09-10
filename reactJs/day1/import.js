@@ -1,4 +1,4 @@
-import { add, sub } from "./arrow.js";
+const mathFunctions = require('./arrow')
 
-console.log(add(10,12));
-console.log(sub(10,20));
+console.log("Addition: ", mathFunctions.add(10, 5));       
+console.log("Subtraction: ", mathFunctions.subtract(10, 5))
