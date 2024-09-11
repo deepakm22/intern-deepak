@@ -10,7 +10,7 @@ import ParentComponent from './components/ParentComponent';
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <h1>React seState</h1>
+    <h1>React UseState</h1>
     <ShowHideComponent />
     <CounterComponent />
     <ParentComponent />

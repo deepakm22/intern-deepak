@@ -1,21 +1,3 @@
-// import React, {useState} from 'react';
-
-// function ShowHideComponent() {
-//     const [isVisible, setIsVisible] = useState(false)
-
-//     return(
-//         <div>
-//             <button onClick={() => setIsVisible(!isVisible)}>
-//                 {isVisible ? 'Hide' : 'Show'}
-//             </button>
-
-//             {isVisible && <p>Tis is my Component!</p>}
-//         </div>
-//     )
-// }
-
-// export default ShowHideComponent;
-
 import React, { useState } from 'react';
 
 function ShowHideComponent() {
