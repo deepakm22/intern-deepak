@@ -10,6 +10,7 @@ router.get('/getSingle/:id', authMiddleware, getSingle)
 router.put('/edit/:id', authMiddleware,editPost)
 router.post('/:id', authMiddleware, likes_comments)
 router.put('/:id', authMiddleware, editLikeComments)
+// router.get('/search', authMiddleware, searchPosts);
 
 
 
