@@ -20,7 +20,7 @@ app.use('/api/post', postRoutes)
 sequelize.authenticate()
     .then(() => {
         // console.log('Database connected successfully');
-        return sequelize.sync(); 
+        return sequelize.sync({alter: true}); 
     })
     .then(() => {
     app.listen(3000, () => {

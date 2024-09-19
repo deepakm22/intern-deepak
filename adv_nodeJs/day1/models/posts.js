@@ -67,6 +67,22 @@ const PostLikesComments = sequelize.define('PostLikesComments', {
     timestamps: false,
 });
 
+const Category =sequelize.define('categories',{
+    id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    },
+category: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    }
+},{
+    tableName:"categories",
+    timestamps: false
+})
+
 
 Users.hasMany(Posts, { foreignKey: 'userId' });
 Posts.belongsTo(Users, { foreignKey: 'userId' });
@@ -77,4 +93,6 @@ PostLikesComments.belongsTo(Posts, { foreignKey: 'postId' });
 Users.hasMany(PostLikesComments, { foreignKey: 'userId' });
 PostLikesComments.belongsTo(Users, { foreignKey: 'userId' });
 
-module.exports = { Posts, PostLikesComments };
+Posts.belongsTo(Category,{as: 'category', foreignKey: 'categoryId'})
+
+module.exports = { Posts, PostLikesComments, Category };
