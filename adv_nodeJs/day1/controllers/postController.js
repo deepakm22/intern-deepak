@@ -1,5 +1,5 @@
 const {Posts, PostLikesComments, Category} = require('../models/posts')
-const {User} = require('../models/User')
+const User = require('../models/User')
 const {Op} = require('sequelize')
 
 const createPost = async (req, res) => {
@@ -448,7 +448,7 @@ const LikesCommentsCounts = async (req, res) => {
             where: { postId, comment: { [Op.ne]: null } },
             attributes: ['userId', 'comment'],
             include: [{
-                model: User,
+                model: User, 
                 attributes: ['email']
             }]
         });
@@ -471,6 +471,8 @@ const LikesCommentsCounts = async (req, res) => {
         });
     }
 };
+
+
 
 
 module.exports= {createPost, getPost, getMyPost, getSingle, editPost, deletePost, likes_comments, editLikeComments, search_posts, LikesCommentsCounts, createCategory}
