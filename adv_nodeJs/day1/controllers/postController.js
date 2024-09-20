@@ -4,6 +4,7 @@ const {Op} = require('sequelize')
 
 const createPost = async (req, res) => {
     const { title, description, categoryId } = req.body;
+    
     try {
         if (!req.files || !req.files.image) {
             return res.status(400).json({
@@ -18,11 +19,11 @@ const createPost = async (req, res) => {
         const imageBuffer = imageFile.data;
 
         const newPost = await Posts.create({
-            userId: req.user,
+            userId: req.user, 
             title,
             description,
             image: imageBuffer,
-            categoryId: categoryId
+            categoryId
         });
 
         res.status(201).json({
@@ -41,7 +42,6 @@ const createPost = async (req, res) => {
         });
     }
 };
-
 
 const getPost = async (req, res) => {
     try {
@@ -78,7 +78,7 @@ const getPost = async (req, res) => {
 const getMyPost = async (req, res) => {
     try {
         const posts = await Posts.findAll({
-            where: { id: req.user },
+            where: { userId: req.user },
             include: {
                 model: Category,
                 as: 'category',
@@ -112,7 +112,7 @@ const getSingle = async (req, res) => {
     const { id } = req.params;
     try {
         const posts = await Posts.findAll({
-            where: { id, userId: req.user },
+            where: { id },
             include: {
                 model: Category,
                 as: 'category',
@@ -156,7 +156,11 @@ const editPost = async (req, res) => {
         const { id } = req.params;
         const { title, description } = req.body;
         const imageFile = req.files?.image;
-        const { id: userId } = req.user;
+        const  userId  = req.user;
+
+console.log(userId);
+
+
 
         const post = await Posts.findByPk(id);
 
@@ -169,6 +173,8 @@ const editPost = async (req, res) => {
             });
         }
 
+        console.log(post.userId);
+        
         if (post.userId !== userId) {
             return res.status(403).json({
                 result: {},
@@ -241,7 +247,7 @@ const likes_comments = async (req, res) => {
     try {
         const likes = await PostLikesComments.create({
             postId: id,
-            userId: req.user,
+            userId: req.user, 
             like,
             comment
         });
@@ -264,14 +270,16 @@ const likes_comments = async (req, res) => {
             reason: error.message
         });
     }
-};
+}
 
 const editLikeComments = async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params; 
     const { like, comment } = req.body;
 
     try {
-        const post = await PostLikesComments.findOne({ where: { postId: id, userId: req.user } });
+        const post = await PostLikesComments.findOne({
+            where: { postId: id, userId: req.user }
+        });
 
         if (!post) {
             return res.status(404).json({
@@ -307,15 +315,6 @@ const editLikeComments = async (req, res) => {
 
 const search_posts = async (req, res) => {
     const { title } = req.query;
-
-    if (!title) {
-        return res.status(400).json({
-            result: {},
-            message: 'Title is required to search',
-            status: 'error',
-            responseCode: 400
-        });
-    }
 
     try {
         const exactMatchPost = await Posts.findOne({

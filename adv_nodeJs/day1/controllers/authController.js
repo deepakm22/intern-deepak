@@ -6,21 +6,10 @@ require('dotenv').config();
 
 
 exports.register = async (req, res) => {
-    console.log('Register endpoint hit'); 
+    console.log('Register endpoint hit');
 
     try {
         const { name, email, password } = req.body;
-        console.log('Request received:', { name, email, password }); 
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({
-                result: {},
-                message: 'Please enter a valid email address',
-                status: 'error',
-                responseCode: 400
-            });
-        }
 
         const existingUser = await User.findOne({ where: { email } });
         if (existingUser) {
@@ -42,23 +31,44 @@ exports.register = async (req, res) => {
             });
         }
 
-        if (password.length < 6) {
-            return res.status(400).json({
-                result: {},
-                message: 'Password must be at least 6 characters long',
-                status: 'error',
-                responseCode: 400
-            });
-        }
-
         const hashedPassword = await bcrypt.hash(password, 10);
         console.log(`Creating user with name: ${name}, email: ${email}`);
 
         await User.create({ name, email, password: hashedPassword });
 
         console.log('User created successfully:', { name, email });
-        
-        sendMail(email, 'Registered Successfully', `Welcome ${name}`);
+
+        sendMail(email, 'Register Successful', `Welcome back, ${name}!`, `
+            <div style="font-family: 'Helvetica', 'Arial', sans-serif; color: #4a4a4a; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+                <h2 style="color: #2c3e50;">👋 Hey ${name},</h2>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    We're thrilled to have you back! You've successfully register into your account. If you didn't log in or noticed any unusual activity, please <a href="mailto:deepaklogo222@gmail.com" style="color: #3498db; text-decoration: none;">let us know</a> right away.
+                </p>
+                <div style="background-color: #ecf0f1; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #e74c3c;">🎯 Next Steps for You:</h3>
+                    <ul style="list-style-type: none; padding-left: 0; font-size: 15px;">
+                        <li style="padding: 8px 0;"><strong>🔄 Update your profile:</strong> Keep your information up to date for a personalized experience.</li>
+                        <li style="padding: 8px 0;"><strong>✨ Explore new features:</strong> We've introduced some amazing updates since your last visit. Check them out!</li>
+                        <li style="padding: 8px 0;"><strong>🔒 Secure your account:</strong> Ensure your password is strong and set up two-factor authentication.</li>
+                    </ul>
+                </div>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    Thanks for being a valued member of our community. We can't wait for you to explore all the great things we've been working on!
+                </p>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://yourapp.com/login" style="background-color: #2ecc71; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                        Explore Now 🚀
+                    </a>
+                </div>
+                <p style="font-size: 14px; color: #95a5a6; margin-top: 30px;">
+                    If you need any help, feel free to <a href="mailto:deepaklogo222@gmail.com" style="color: #3498db; text-decoration: none;">reach out to our support team</a>.
+                </p>
+                <p style="font-size: 14px; color: #95a5a6;">
+                    Best regards,<br>Your Company Team
+                </p>
+
+            </div>
+        `);
 
         return res.status(201).json({
             result: { name, email },
@@ -78,30 +88,9 @@ exports.register = async (req, res) => {
     }
 };
 
-
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log('Login request received:', { email, password });
-
-        if (!email || !password) {
-            return res.status(400).json({
-                result: {},
-                message: 'All fields are required',
-                status: 'error',
-                responseCode: 400
-            });
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return res.status(400).json({
-                result: {},
-                message: 'Please enter a valid email address',
-                status: 'error',
-                responseCode: 400
-            });
-        }
 
         const user = await User.findOne({ where: { email } });
         if (!user) {
@@ -125,26 +114,44 @@ exports.login = async (req, res) => {
 
         console.log('Login successful for user:', user.name);
 
-        if (!process.env.SECRET_KEY) {
-            return res.status(500).json({
-                result: {},
-                message: 'SECRET_KEY is not defined in environment variables',
-                status: 'error',
-                responseCode: 500
-            });
-        }
-
         const token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET_KEY);
-        const status = "Login successful";
-        const username = user.name;
 
-        sendMail(email, 'Login Successfully', `Welcome back, ${username}`, `
-            <h3>Hi ${user.email}</h3>
-            <img src="https://images.pexels.com/photos/28314332/pexels-photo-28314332/free-photo-of-a-black-and-white-photo-of-a-man-leaning-on-his-hand.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load">
+        sendMail(email, 'Login Successful', `Welcome back, ${user.name}!`, `
+            <div style="font-family: 'Helvetica', 'Arial', sans-serif; color: #4a4a4a; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
+                <h2 style="color: #2c3e50;">👋 Hey ${user.name},</h2>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    We're thrilled to have you back! You've successfully logged into your account. If you didn't log in or noticed any unusual activity, please <a href="mailto:deepaklogo222@gmail.com" style="color: #3498db; text-decoration: none;">let us know</a> right away.
+                </p>
+                <div style="background-color: #ecf0f1; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="color: #e74c3c;">🎯 Next Steps for You:</h3>
+                    <ul style="list-style-type: none; padding-left: 0; font-size: 15px;">
+                        <li style="padding: 8px 0;"><strong>🔄 Update your profile:</strong> Keep your information up to date for a personalized experience.</li>
+                        <li style="padding: 8px 0;"><strong>✨ Explore new features:</strong> We've introduced some amazing updates since your last visit. Check them out!</li>
+                        <li style="padding: 8px 0;"><strong>🔒 Secure your account:</strong> Ensure your password is strong and set up two-factor authentication.</li>
+                    </ul>
+                </div>
+                <p style="font-size: 16px; line-height: 1.6;">
+                    Thanks for being a valued member of our community. We can't wait for you to explore all the great things we've been working on!
+                </p>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://yourapp.com/login" style="background-color: #2ecc71; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                        Explore Now 🚀
+                    </a>
+                </div>
+                <p style="font-size: 14px; color: #95a5a6; margin-top: 30px;">
+                    If you need any help, feel free to <a href="mailto:deepaklogo222@gmail.com" style="color: #3498db; text-decoration: none;">reach out to our support team</a>.
+                </p>
+                <p style="font-size: 14px; color: #95a5a6;">
+                    Best regards,<br>Your Company Team
+                </p>
+
+            </div>
         `);
+        
+        
 
         return res.status(200).json({
-            result: { username, token },
+            result: { username: user.name, token },
             message: 'Login successful',
             status: 'success',
             responseCode: 200
@@ -160,3 +167,4 @@ exports.login = async (req, res) => {
         });
     }
 };
+
