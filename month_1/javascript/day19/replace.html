@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji</title>
+    <style>
+        p{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <center><h1>Replace Emoji 😎</h1></center>
+    <div>
+    <p id="paragraph1">Lorem ipsum dolor sit amet consectetur adipisicing elit.? Et velit commodi illo cupiditate aspernatur error odio dolorem facilis fugiat similique!</p>
+    <p id="paragraph2">Lorem ipsum dolor sit amet consectetur adipisicing elit! Modi distinctio tempore corporis esse at, nulla omnis magni eveniet ratione rerum?.</p>
+    <p id="paragraph3">Lorem, ipsum dolor sit amet consectetur adipisicing elit!. Officia, vero voluptates sit? ipsa perferendis fuga suscipit laborum nobis. Alias, non!.</p>
+    <p id="paragraph4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam quis reprehenderit eum quisquam minus! Numquam deleniti libero quae labore quia?.</p>
+
+</div>
+<script>
+
+document.addEventListener("DOMContentLoaded", ()=> {
+    var paragraphs = document.querySelectorAll("p");
+
+    paragraphs.forEach(function(paragraph) {
+    var text = paragraph.innerText;
+    text = text.replace(/\?/g, "🤔")
+    text = text.replace(/!/g, "😲")
+    paragraph.innerText = text;
+})
+
+})
+
+
+</script>
+
+
+</body>
+</html>

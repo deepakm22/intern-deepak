@@ -1,0 +1,108 @@
+#lg-bag a i {
+    position: relative;
+}
+#lg-bag a i::after {
+    content: attr(data-count);
+    position: absolute;
+    top: -13px;
+    right: -8px;
+    /* background-color: rgb(29, 4, 119); */
+    color: rgb(39, 39, 39);
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+        .cart-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .cart-item-info{
+            margin: 15px;
+        }
+        .cart-item img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        .cart-item-details {
+            padding: 20px;
+        }
+        .cart-item-details h5 {
+            margin: 0;
+        }
+        .cart-item-details p {
+            color: #777;
+        }
+        .cart-item-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-item-actions button {
+            background-color: #f0ad4e;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .cart-item-actions button:hover {
+            background-color: #ec971f;
+        }
+
+#total-price {
+    font-size: 1.5rem;  
+    font-weight: bold;   
+    color: #333;         
+    margin-top: 20px;    
+    padding: 10px;       
+    border: 2px ;  
+    border-radius: 5px; 
+    background-color: #e7f1ff;  
+    text-align: center;   
+}
+.remove-btn {
+    background-color: #ff4d4d; 
+    color: white; 
+    border: none; 
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    transition: background-color 0.3s ease; /
+}
+
+.remove-btn:hover {
+    background-color: #ff1a1a;
+}
+
+.remove-btn:active {
+    background-color: #cc0000; 
+    transform: scale(0.98); 
+}
+
+
+#place-order {
+    background-color: #007bff;  
+    color: white;                
+    border: none;                
+    border-radius: 5px;        
+    padding: 10px 20px;         
+    font-size: 25px;            
+    cursor: pointer;             
+    transition: background-color 0.3s; 
+    display: inline-block;       
+    margin-top: 20px;  
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#place-order:hover {
+    background-color: #022750;  
+}

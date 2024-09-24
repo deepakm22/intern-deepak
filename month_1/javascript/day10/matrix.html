@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix</title>
+</head>
+<body>
+    <h1>MATRIX</h1>
+
+<script>
+class Matrix{
+    constructor(rows , cols){
+        this.rows = rows;
+        this.cols = cols;
+        this.data = [];
+
+        for(let i=0 ; i<3 ; i++){
+        this.data[i] = [];
+        for(let j=0 ; j<3 ; j++){
+        this.data[i][j] = [];
+    }
+    }
+    }
+
+setValue(row , col, value){
+
+    return this.data[row][col] = value;
+}
+
+
+
+print(){
+    for(let i=0 ; i<3 ; i++){
+        console.log(this.data[i].join(''))
+    }
+}
+
+}
+
+
+let matrix = new Matrix(); 
+matrix.setValue(0, 0, 1);
+matrix.setValue(0, 1, 2);
+matrix.setValue(0, 2, 3);
+matrix.setValue(1, 0, 4);
+matrix.setValue(1, 1, 5);
+matrix.setValue(1, 2, 6);
+matrix.setValue(2, 0, 7);
+matrix.setValue(2, 1, 8);
+matrix.setValue(2, 2, 9);
+
+matrix.print();
+
+
+
+
+</script>
+
+
+</body>
+</html>

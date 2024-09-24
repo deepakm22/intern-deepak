@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Separated sentence</title>
+<style>
+    p{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: xx-large;
+        
+    }
+</style>
+</head>
+<body>
+    <center><h1>Separate a Sentence</h1></center>
+<div>
+<p id="paragraph">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus dolore eligendi voluptatibus. Atque nesciunt vel deserunt facilis dolor, dolorem distinctio rerum perferendis numquam quidem velit pariatur natus neque eum aut et, necessitatibus error debitis adipisci a cupiditate, porro eligendi aliquam? Eligendi voluptatem, qui reprehenderit provident facilis deleniti quaerat quisquam fuga! Ut, soluta similique accusamus nesciunt dignissimos sapiente ullam quas accusantium quia velit eum eaque harum et voluptates ea provident ducimus quae ad, quam commodi nostrum. Dolorem, itaque nostrum. Perferendis officia necessitatibus omnis asperiores similique, inventore id qui doloremque repudiandae delectus adipisci odio officiis consequuntur architecto quibusdam, voluptate ratione nihil odit.</p>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", ()=>{
+    var paragraph = document.getElementById("paragraph")
+    var text = paragraph.innerText
+    
+    var Sentence = text.split('.')
+    var formatedsentence = []
+    
+    Sentence.forEach(function(splitedSentence){
+        splitedSentence = splitedSentence.trim()
+
+        if(splitedSentence !== ""){
+            formatedsentence.push(splitedSentence + ".")
+        }
+    })
+    paragraph.innerHTML = formatedsentence.join("<br>")
+})
+
+
+</script>
+</body>
+</html>

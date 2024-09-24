@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlights</title>
+    <style>
+p{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: x-large;
+    text-align: justify;
+    
+    
+}
+    </style>
+</head>
+<body>
+    
+    <center> <h1>Highlights the Paragraph</h1> </center>   
+    <div >
+        <p id="paragraph1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque, explicabo, ducimus ipsa minus accusamus autem in, rem nesciunt accusantium sunt amet obcaecati deserunt non facere saepe eligendi optio corrupti illum?</p>
+        <p id="paragraph2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis neque molestiae sint fuga facere a pariatur, sapiente dignissimos asperiores aperiam in nam autem necessitatibus sequi repellat? Rem consequatur quo magnam!</p>
+        <p id="paragraph3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit minus dolor assumenda molestias maxime qui provident omnis explicabo quidem. Est provident officia, voluptas blanditiis earum voluptates dignissimos atque ipsam corporis.</p>   
+    </div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var paragraphs = document.querySelectorAll("p");
+
+    paragraphs.forEach(function(paragraph) {
+    var text = paragraph.innerText;
+    var words = text.split(" ");
+    for (var i = 0; i < words.length; i++) {
+        if (words[i].length > 8) {
+            words[i] = `<span style="background-color: lightgreen ;">${words[i]}</span>`;
+        }
+    }
+
+    paragraph.innerHTML = words.join(" ");
+})
+});
+</script>
+
+
+</body>
+</html>
+
+

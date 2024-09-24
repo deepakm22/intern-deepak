@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle</title>
+</head>
+<body>
+    
+<center>
+    <h1>CIRCLE</h1>
+    <h2>Area and Circumfrence</h2>
+</center>
+
+<script>
+class Circle{
+    constructor(radius){
+        this.radius = radius;
+    }
+
+area(){
+    let area = Math.PI* this.radius * this.radius;
+    return area
+}
+
+circumfrence(){
+    let circumfrence = 2 * Math.PI * this.radius;
+    return circumfrence
+}
+
+
+}
+class triangle{
+    constructor(a,b,c){
+        this.a = a;
+        this.b = b;
+        this.c = c;
+    }
+
+area(){
+let area = 1/2 * (this.a * this.b)
+return area
+}
+
+circumfrence(){
+    let circumfrence = this.a + this.b + this.c;
+    return circumfrence
+}
+
+}
+
+class rectangle{
+    constructor(l,b){
+        this.a = l;
+        this.b = b;
+    
+    }
+
+area(){
+let area = ( this.a * this.b)
+return area
+}
+
+circumfrence(){
+    let circumfrence = 2 * (this.a * this.b);
+    return circumfrence
+}
+
+}
+
+
+
+
+
+let Circle1 = new Circle(5)
+console.log("Area of Circle :" , + Circle1.area())
+console.log("Circumference of Circle :" , + Circle1.circumfrence())
+let triangle1 = new triangle(3,4,5)
+console.log("Area of triangle :" , + triangle1.area())
+console.log("Circumference of triangle :" , + triangle1.circumfrence())
+let Rectangle1 = new rectangle(5,6)
+console.log("Area of rectangle :" , + Rectangle1.area())
+console.log("Circumference of rectangle :" , + Rectangle1.circumfrence())
+
+
+
+</script>
+
+
+</body>
+</html>

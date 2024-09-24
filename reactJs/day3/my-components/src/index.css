@@ -1,0 +1,129 @@
+/* General styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f7f8f8, #e5e5e5);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+/* Root container border */
+#root {
+  border: 4px solid #4CAF50; /* Green border */
+  border-radius: 12px; /* Rounded corners */
+  padding: 50px; /* Padding inside the border */
+  background: #ffffff; /* Background color inside border */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow around the root container */
+}
+
+/* Heading style */
+h1 {
+  color: #333;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Main container for the two boxes */
+.main-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  background: #ffffff;
+}
+
+/* Individual box style with border */
+.box {
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #ddd; /* Light gray border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: #f9f9f9;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-color: #bbb; /* Slightly darker border on hover */
+}
+
+/* Button styles */
+button {
+  background: linear-gradient(to right, #4CAF50, #81C784);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(to right, #45a049, #76c893);
+  transform: scale(1.05);
+}
+
+button:active {
+  background: linear-gradient(to right, #388e3c, #66bb6a);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Paragraph styles */
+p {
+  margin: 20px 0;
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+
+/* Styling the root container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f5;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the Parent Component */
+/* .parent-box {
+  background-color: #ffffff;
+  border: 2px solid #008cba;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+} */
+
+.logo {
+  width: 80px;
+  height: 80px;
+  /* margin-bottom: 20px; */
+  
+}
+/* .parent-container {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;     
+ height: 100vh;           
+  background-color: var(--color); 
+} */

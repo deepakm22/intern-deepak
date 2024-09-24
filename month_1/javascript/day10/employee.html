@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee</title>
+</head>
+<body>
+    <h1>EMPLOYEE</h1>
+
+<script>
+class Employee {
+constructor() {
+    this.salary = 0;
+    this.hoursWorkedPerDay = 0;
+}
+
+getInfo(salary ,  hoursWorkedPerDay){
+this.salary = salary;
+this.hoursWorkedPerDay = hoursWorkedPerDay;
+
+}
+
+addsal(){
+    if(this.salary < 500){
+    console.log( this.salary += 10)
+}else{
+    console.log(this.salary)
+}
+}
+
+addWorks(){
+    if(this.hoursWorkedPerDay > 6){
+    console.log(this.salary += 5)
+}else{
+    console.log(this.salary)
+}
+}
+
+printSalary(){
+console.log("Final Salary:" +"$" + this.salary)
+}
+}
+
+
+let emp = new Employee()
+emp.getInfo(460,6)
+emp.addWorks()
+emp.addsal()
+emp.printSalary()
+
+
+</script>
+
+</body>
+</html>

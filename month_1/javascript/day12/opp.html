@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .box {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <center> <h1>ONLY INTEGER</h1></center>
+        <form id="integer-value">
+            <div class="box">
+                <label for="inputA">Input A</label>
+                <input type="text" class="form-control" id="inputA" placeholder="Enter first integer">
+            </div>
+            <div class="box">
+                <label for="inputB">Input B</label>
+                <input type="text" class="form-control" id="inputB" placeholder="Enter second integer">
+            </div>
+            <button type="submit" class="btn btn-primary">Calculate</button>
+        </form>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const num = (input1, input2) => {
+            if (!Number.isInteger(input1) || !Number.isInteger(input2)) {
+                alert("Please enter valid integer values.");
+                return;
+            }
+            
+            const modulusResult = input1 % input2;
+            const divisionResult = input1 / input2;
+            const multiplicationResult = input1 * input2;
+
+            const results1 = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <h4>Results:</h4>
+                <p>Modulus result: ${modulusResult}</p>
+                <p>Division result: ${divisionResult}</p>
+                <p>Multiplication result: ${multiplicationResult}</p>
+            `;
+        };
+
+        document.getElementById('integer-value').addEventListener('submit', function(event) {
+            
+            const inputA = parseInt(document.getElementById('inputA').value);
+            const inputB = parseInt(document.getElementById('inputB').value);
+
+            num(inputA, inputB);
+        });
+    </script>
+</body>
+</html>

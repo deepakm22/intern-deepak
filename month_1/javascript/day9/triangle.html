@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>triangle</title>
+</head>
+<body>
+    
+<h1>triangle</h1>
+
+
+<script>
+
+class triangle{
+    constructor(){
+        this.side1 = 3;
+        this.side2 = 4;
+        this.side3 = 5;
+    }
+perimeter(){
+    console.log("Perimeter of a triangle:", + this.side1 + this.side2 + this.side3) 
+}
+
+area(){
+console.log("Area of a triangle:", + 1/2 * (this.side1 * this.side2))
+
+}
+
+}
+
+let triangle1 = new triangle()
+triangle1.area()
+triangle1.perimeter()
+
+
+</script>
+
+
+
+</body>
+</html>

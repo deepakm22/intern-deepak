@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade Calculator</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    body {
+    background-color: #f0f0f0;
+    padding: 20px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+h2{
+    color: rgba(85, 74, 74, 0.829);
+}
+
+
+    .container {
+    max-width: 350px;
+    background-color: #eba0a0;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+    margin: 0 auto;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2 >GRADE CALCULATOR</h2>
+    <form id="gradeForm">
+    <div class="form-group">
+        <label for="subject1">Subject 1 Marks:</label>
+        <input type="number" class="form-control" id="subject1" name="subject1" required>
+    </div>
+    <div class="form-group">
+        <label for="subject2">Subject 2 Marks:</label>
+        <input type="number" class="form-control" id="subject2" name="subject2" required>
+    </div>
+    <div class="form-group">
+        <label for="subject3">Subject 3 Marks:</label>
+        <input type="number" class="form-control" id="subject3" name="subject3" required>
+    </div>
+    <div class="form-group">
+        <label for="subject4">Subject 4 Marks:</label>
+        <input type="number" class="form-control" id="subject4" name="subject4" required>
+    </div>
+    <div class="form-group">
+        <label for="subject5">Subject 5 Marks:</label>
+        <input type="number" class="form-control" id="subject5" name="subject5" required>
+    </div>
+    <button type="submit" class="btn btn-primary" style="background-color: rgb(211, 28, 202);">Calculate</button>
+    </form>
+    <div id="gradeResult" ></div>
+</div>
+
+
+
+<script>
+    document.getElementById('gradeForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    let marks1 = document.getElementById('subject1').value;
+    let marks2 = document.getElementById('subject2').value;
+    let marks3 = document.getElementById('subject3').value;
+    let marks4 = document.getElementById('subject4').value;
+    let marks5 = document.getElementById('subject5').value;
+    
+    let totalMarks = marks1 + marks2 + marks3 + marks4 + marks5;
+    
+    let gradeMessage = '';
+    if (totalMarks > 450) {
+        gradeMessage = 'You scored grade A —   Congratulations.';
+    } else if (totalMarks > 300 && totalMarks <= 450) {
+        gradeMessage = 'You scored grade B —   Good Job.';
+    } else if (totalMarks > 250 && totalMarks <= 300) {
+        gradeMessage = 'You scored grade C —   You can do better.';
+    } else if (totalMarks < 250) {
+        gradeMessage = 'Need to Work Hard.';
+    }
+    
+    document.getElementById('gradeResult').innerHTML = '<div class="alert alert-info">' + gradeMessage + '</div>';
+    });
+</script>
+</body>
+</html>

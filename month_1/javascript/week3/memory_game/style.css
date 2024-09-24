@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: 'Times New Roman', Times, serif; */
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: black;  
+    background-image: url("img/pexels-dom-sch-veg-man-381944029-14645039.jpg");
+
+}
+
+.container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    /* background: rgb(72, 207, 248); */
+    padding: 40px 60px;
+    font-weight: 600;
+    background-image: url(img/bg.jpg);
+    
+} 
+
+
+h2{
+    color: rgb(86, 241, 241);
+    font-size: xx-large;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: fantasy;
+}
+
+.reset{
+    padding: 15px 20px;
+    color: rgb(246, 247, 248);
+    background: rgb(50, 142, 223);
+    border: none;
+    font-size: 1    em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 15px;
+}
+
+.reset:focus{
+    color: rgb(1, 37, 90);
+    background: aliceblue;
+}
+
+.reset:hover {
+    background-color: #04AA6D;
+}
+
+.game{
+    width: 440px;
+    height: 440px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    transform-style: preserve-3d;
+    perspective: 500px;
+    
+}
+
+.item{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    background: whitesmoke;
+    transform: rotateY(180deg);
+    transition: 0.25s;
+    box-shadow: 10px 10px rgba(174, 174, 175, 0.082);
+}
+
+.item.boxOpen{
+    transform: rotateY(0deg);
+}
+
+.item::after{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("img/pexels-zaksheuskaya-709412-1568607.jpg");
+    transition: 0.25s;
+    transform: rotateY(0deg);
+    backface-visibility: hidden;
+    
+
+}
+
+.boxOpen::after,
+.boxMatch::after{
+    transform: rotateY(180deg);
+
+}
+
+
+
+
+
+

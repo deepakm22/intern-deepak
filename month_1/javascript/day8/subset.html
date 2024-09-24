@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subset of string</title>
+</head>
+<body>
+<h1>Substring</h1>
+
+
+    <script>
+    let   a= 'deepak'
+        empty= {}
+function substring(n){
+        for(let i=0;i< n.length;i++)
+            {
+                console.log(n[i])
+                for( let j= i+1; j<=n.length;j++)
+        {
+                empty.push(n.slice(i,j))
+            } 
+            }
+
+        console.log(empty)
+}
+substring(a)
+    </script>
+    
+</body>
+</html>

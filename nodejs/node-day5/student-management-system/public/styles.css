@@ -1,0 +1,120 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: #0557d1;
+    text-transform: uppercase;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.student-card {
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    background-color: #fff;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    padding: 1rem;
+
+}
+
+.student-card h3 {
+    margin-top: 0;
+    color: #343a40;
+}
+
+.student-card p {
+    margin: .5rem 0;
+    color: #6c757d;
+}
+
+.card-actions {
+    margin-top: 1rem;
+}
+
+.card-actions button {
+    margin-right: .5rem;
+}
+
+.card-actions .btn {
+    padding: .375rem .75rem;
+    font-size: .875rem;
+}
+
+.card-actions .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.card-actions .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.student-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+}
+
+.student-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.student-card p {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.card-actions button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.card-actions button:nth-child(1) {
+    background-color: #dc3545;
+}
+
+.card-actions button:nth-child(2) {
+    background-color: #0d6efd;
+}
+
+.card-actions button:nth-child(3) {
+    background-color: #36f340;
+}
+
+
+
+/* Styling the form */
+.form-label {
+    font-weight: 600;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <h1>Working With HTTP</h1></center>
+        <pre id="result"></pre>
+
+
+    <script>
+
+function fetchData() {
+    const data1 = new XMLHttpRequest();
+    const url = 'https://data.covid19india.org/state_district_wise.json';
+        data1.open('GET', url, true);
+
+    data1.onreadystatechange = function() {
+        if (data1.readyState === XMLHttpRequest.DONE) {
+        if (data1.status >= 200 && data1.status < 300) {
+            const response = JSON.parse(data1.responseText);
+            const prettyResponse = JSON.stringify(response, null, 2); 
+            document.getElementById('result').textContent = prettyResponse; 
+        } else {
+            console.error('Request failed with status code', data1.status);
+        }
+        }
+    };
+    data1.onerror = function() {
+        console.error('Network error');
+    };
+    data1.send();
+}
+
+window.onload = fetchData;
+
+
+    </script>
+</body>
+</html>
